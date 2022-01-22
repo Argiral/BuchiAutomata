@@ -1,4 +1,7 @@
 import Interfaces.ITransition;
+import Model.BuchiAutomata;
+import Model.State;
+import Model.Transition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -92,6 +95,19 @@ class BuchiAutomataTest {
         assert automataDBA.getAlphabet().containsAll(alph);
     }
 
+    @Test
+    void numberOfStates() {
+        assertEquals(automataNBA.numberOfStates(), 5);
+        assertEquals(automataDBA.numberOfStates(), 4);
+    }
+
+    @Test
+    void numberOfTransitions() {
+        assertEquals(automataNBA.numberOfTransitions(), 11);
+        assertEquals(automataDBA.numberOfTransitions(), 7);
+    }
+
+
     void createTestNBA() {
         // Create non-deterministic automata
         automataNBA = new BuchiAutomata();
@@ -117,7 +133,7 @@ class BuchiAutomataTest {
         automataNBA.addTransition(new Transition(s1, 'b', s1));
         automataNBA.addTransition(new Transition(s1, 'a', s3));
         automataNBA.addTransition(new Transition(s2, 'a', s2));
-        automataNBA.addTransition(new Transition(s2, 'b', s3));
+        automataNBA.addTransition(new Transition(s2, 'b', s4));
         automataNBA.addTransition(new Transition(s3, 'b', s3));
         automataNBA.addTransition(new Transition(s3, 'a', s4));
         automataNBA.addTransition(new Transition(s3, 'b', s4));
@@ -137,7 +153,7 @@ class BuchiAutomataTest {
         State s2 = new State("q2", true);
         automataDBA.addState(s2);
         State s3 = State.createFinalState("q3");
-//        State s3 = new State("q3", true);
+//        Model.State s3 = new Model.State("q3", true);
         automataDBA.addState(s3);
 
         // Do not set initial state, q0 should be set automatically since it is the first one added
@@ -146,8 +162,8 @@ class BuchiAutomataTest {
         automataDBA.addTransition(new Transition(s0, 'a', s1));
         automataDBA.addTransition(new Transition(s0, 'b', s2));
         automataDBA.addTransition(new Transition(s1, 'a', s3));
-            // With transition Transition(s1, 'b', s2) would be complete
-        automataDBA.addTransition(new Transition(s2, 'a', s2));
+            // With transition Model.Transition(s1, 'b', s2) would be complete
+        automataDBA.addTransition(new Transition(s2, 'a', s3));
         automataDBA.addTransition(new Transition(s2, 'b', s3));
         automataDBA.addTransition(new Transition(s3, 'a', s1));
         automataDBA.addTransition(new Transition(s3, 'b', s3));

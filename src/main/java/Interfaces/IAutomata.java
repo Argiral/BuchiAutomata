@@ -45,6 +45,18 @@ public interface IAutomata {
     List<IState> getStates();
 
     /**
+     * Get the number of states in the automata
+     * @return The number of states
+     */
+    int numberOfStates();
+
+    /**
+     * Get the number of transitions in the automata
+     * @return The number of transitions
+     */
+    int numberOfTransitions();
+
+    /**
      *
      * @return The list of final (accepting) states
      */

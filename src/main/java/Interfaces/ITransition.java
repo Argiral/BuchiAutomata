@@ -16,7 +16,7 @@ public interface ITransition {
 
     /**
      * Get the transition symbol
-     * @return Transition symbol
+     * @return Model.Transition symbol
      */
     char getSymbol();
 }

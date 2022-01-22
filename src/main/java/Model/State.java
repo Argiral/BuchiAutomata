@@ -1,3 +1,5 @@
+package Model;
+
 import Interfaces.IState;
 
 public class State implements IState {

@@ -1,3 +1,5 @@
+package Model;
+
 import Interfaces.IState;
 import Interfaces.ITransition;
 
@@ -34,7 +36,7 @@ public class Transition implements ITransition {
     /**
      * Get the transition symbol
      *
-     * @return Transition symbol
+     * @return Model.Transition symbol
      */
     @Override
     public char getSymbol() {

@@ -1,3 +1,5 @@
+package Model;
+
 import Interfaces.IAutomata;
 import Interfaces.IState;
 import Interfaces.ITransition;
@@ -95,6 +97,26 @@ public class BuchiAutomata implements IAutomata {
     @Override
     public List<IState> getStates() {
         return this.states;
+    }
+
+    /**
+     * Get the number of states in the automata
+     *
+     * @return The number of states
+     */
+    @Override
+    public int numberOfStates() {
+        return this.states.size();
+    }
+
+    /**
+     * Get the number of transitions in the automata
+     *
+     * @return The number of transitions
+     */
+    @Override
+    public int numberOfTransitions() {
+        return this.getTransitionsList().size();
     }
 
     /**
