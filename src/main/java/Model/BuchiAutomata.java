@@ -92,6 +92,22 @@ public class BuchiAutomata implements IAutomata {
     }
 
     /**
+     * Get the state with a given name
+     *
+     * @param name the name of the state to retrive
+     * @return The requested state, or null if no state with the given name exist in the automata
+     */
+    @Override
+    public IState getStateByKey(String name) {
+        for (IState s : this.states) {
+            if (s.getKey().equals(name)) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    /**
      * @return The list of states
      */
     @Override
@@ -278,5 +294,31 @@ public class BuchiAutomata implements IAutomata {
     @Override
     public Set<Character> getAlphabet() {
         return this.alphabet;
+    }
+
+    /**
+     * Return statistics about the automata
+     * e.g. number of states, transitions
+     *
+     * @return a string describing the automata
+     */
+    @Override
+    public String getStatistics() {
+        StringBuilder finalStatesString = new StringBuilder("[");
+        for (IState iState : this.getFinalStates()) {
+            finalStatesString.append(iState.getKey());
+            finalStatesString.append(";");
+        }
+        finalStatesString.deleteCharAt(finalStatesString.length() - 1); // remove last ';'
+        finalStatesString.append("]");
+
+
+        return "Buchi automata\n" +
+                "number of states: " + this.states.size() + "\n" +
+                "\tinitial state: " + this.initialState.getKey() + "\n" +
+                "\tfinal states:" + finalStatesString + "\n" +
+                "number of transitions: " + this.getTransitionsList().size() + "\n" +
+                "deterministic: " + this.isDeterministic() + "\n" +
+                "complete: " + this.isComplete() + "\n";
     }
 }

@@ -34,6 +34,13 @@ public interface IAutomata {
     IState getInitialState();
 
     /**
+     * Get the state with a given name
+     * @param name the name of the state to retrive
+     * @return The requested state, or null if no state with the given name exist in the automata
+     */
+    IState getStateByKey(String name);
+
+    /**
      * Add a new transition to the automata
      */
     void addTransition(ITransition transition);
@@ -134,4 +141,11 @@ public interface IAutomata {
      * @return the list of valid chars
      */
     Set<Character> getAlphabet();
+
+    /**
+     * Return statistics about the automata
+     * e.g. number of states, transitions
+     * @return a string describing the automata
+     */
+    String getStatistics();
 }
