@@ -1,55 +1,38 @@
 import Control.BuchiAlgorithms;
 import Interfaces.IAutomata;
 import Interfaces.IState;
-import Model.BuchiAutomata;
-import Model.State;
+import Interfaces.ITransition;
 import View.AutomataViewer;
+
+import Model.SeriesAutomata;
 
 public class TestAlgorithms {
     public static void main(String[] args) {
-//        AutomataViewer.printAutomata(s2ex4a1(), "graph/s2/4a.svg");
-//        AutomataViewer.printAutomata(s2ex4a2(), "graph/s2/4b.svg");
-
-        System.out.println(s2ex4a1().getStatistics());
-        IAutomata union = BuchiAlgorithms.union(s2ex4a1(), s2ex4a2());
-        System.out.println(union.getStatistics());
-        AutomataViewer.printAutomata(union, "graph/s2/union.svg");
+        testReductionDegOfNonDet();
+        testUnion();
     }
 
-    static IAutomata s2ex4a1() {
-        IAutomata automata = new BuchiAutomata();
+    private static void testReductionDegOfNonDet() {
+        // Degree of non-determinism reduction
+        IAutomata degReduction = BuchiAlgorithms.reduceDegOfNonDeterminism(SeriesAutomata.s2e2());
 
-        IState q0 = new State("q0");
-        automata.addState(q0);
-        IState q1 = new State("q1", true);
-        automata.addState(q1);
+        // Save images
+        AutomataViewer.printAutomata(SeriesAutomata.s2e2(), "graph/s2/2.svg");
+        AutomataViewer.printAutomata(degReduction, "graph/s2/degReduction.svg");
 
-        automata.addTransition(q0, 'a', q0);
-        automata.addTransition(q0, 'b', q0);
-        automata.addTransition(q0, 'b', q1);
-        automata.addTransition(q1, 'b', q1);
-
-        return automata;
+        // Print statistics
+        System.out.println("DEGREE OF NON-DETERMINISM REDUCTION");
+        System.out.println(SeriesAutomata.s2e2().getStatistics());
+        System.out.println(degReduction.getStatistics());
     }
 
-    static IAutomata s2ex4a2() {
-        IAutomata automata = new BuchiAutomata();
+    private static void testUnion() {
+        // Union of two BA
+        IAutomata union = BuchiAlgorithms.union(SeriesAutomata.s2ex4a1(), SeriesAutomata.s2ex4a2());
 
-        IState q0 = new State("q0");
-        automata.addState(q0);
-        IState q1 = new State("q1");
-        automata.addState(q1);
-        IState q2 = new State("q2", true);
-        automata.addState(q2);
-
-        automata.addTransition(q0, 'a', q0);
-        automata.addTransition(q0, 'b', q0);
-        automata.addTransition(q0, 'a', q1);
-        automata.addTransition(q1, 'b', q1);
-        automata.addTransition(q1, 'a', q2);
-        automata.addTransition(q2, 'a', q2);
-        automata.addTransition(q2, 'a', q2);
-
-        return automata;
+        // Save images
+        AutomataViewer.printAutomata(SeriesAutomata.s2ex4a1(), "graph/s2/4a.svg");
+        AutomataViewer.printAutomata(SeriesAutomata.s2ex4a2(), "graph/s2/4b.svg");
+        AutomataViewer.printAutomata(union, "graph/s2/4_union.svg");
     }
 }

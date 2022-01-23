@@ -208,8 +208,7 @@ public class BuchiAutomata implements IAutomata {
      */
     @Override
     public List<IState> run(char symbol) {
-        // TODO implement run
-        return null;
+        return run(symbol, this.initialState);
     }
 
     /**
@@ -222,8 +221,39 @@ public class BuchiAutomata implements IAutomata {
      */
     @Override
     public List<IState> run(char symbol, IState initialState) {
-        // TODO implement run
-        return null;
+        Set<IState> reachable = new HashSet<>();
+        // Return empty list if no transitions available from given state
+        if (this.transitions.get(initialState) == null) {
+            return new LinkedList<>();
+        }
+        // Get all the transition from the given state
+        for (ITransition t : this.transitions.get(initialState)) {
+            // Check if the symbol is correct
+            if (t.getSymbol() == symbol) {
+                reachable.add(t.getDestination());
+            }
+        }
+        return new LinkedList<>(reachable);
+    }
+
+    /**
+     * Indicate the degree of non-determinism
+     * If for each state and symbol there is at most 1 transition -> 1 (is deterministic)
+     * If at most 2 -> 2
+     * ...
+     *
+     * @return Degree of non-determinism of the automata
+     */
+    @Override
+    public long degreeOfNonDeterminism() {
+        long max = 0;
+        for (List<ITransition> l : this.transitions.values()) {
+            // Check for each possible symbol if there are 2 or more transitions
+            for (char c : this.alphabet) {
+                max = Math.max(max, l.stream().filter(t -> t.getSymbol() == c).count());
+            }
+        }
+        return max;
     }
 
     /**
@@ -236,16 +266,18 @@ public class BuchiAutomata implements IAutomata {
         // The automata is NOT deterministic if there is at least a state with
         // 2 outgoing transitions with the same symbol
 
-        // Iterate over each starting state
-        for (List<ITransition> l : this.transitions.values()) {
-            // Check for each possible symbol if there are 2 or more transitions
-            for (char c : this.alphabet) {
-                if (l.stream().filter(t -> t.getSymbol() == c).count() >= 2) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return this.degreeOfNonDeterminism() <= 1;
+
+//        // Iterate over each starting state
+//        for (List<ITransition> l : this.transitions.values()) {
+//            // Check for each possible symbol if there are 2 or more transitions
+//            for (char c : this.alphabet) {
+//                if (l.stream().filter(t -> t.getSymbol() == c).count() >= 2) {
+//                    return false;
+//                }
+//            }
+//        }
+//        return true;
     }
 
     /**
@@ -314,11 +346,11 @@ public class BuchiAutomata implements IAutomata {
 
 
         return "Buchi automata\n" +
-                "number of states: " + this.states.size() + "\n" +
-                "\tinitial state: " + this.initialState.getKey() + "\n" +
-                "\tfinal states:" + finalStatesString + "\n" +
-                "number of transitions: " + this.getTransitionsList().size() + "\n" +
-                "deterministic: " + this.isDeterministic() + "\n" +
-                "complete: " + this.isComplete() + "\n";
+                "\tnumber of states: " + this.states.size() + "\n" +
+                "\t\tinitial state: " + this.initialState.getKey() + "\n" +
+                "\t\tfinal states:" + finalStatesString + "\n" +
+                "\tnumber of transitions: " + this.getTransitionsList().size() + "\n" +
+                "\tdeterministic: " + this.isDeterministic() + " (deg: " + this.degreeOfNonDeterminism() + ")\n" +
+                "\tcomplete: " + this.isComplete() + "\n";
     }
 }

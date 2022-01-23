@@ -118,6 +118,15 @@ public interface IAutomata {
     List<IState> run(char symbol, IState initialState);
 
     /**
+     * Indicate the degree of non-determinism
+     * If for each state and symbol there is at most 1 transition -> 1 (is deterministic)
+     * If at most 2 -> 2
+     * ...
+     * @return Degree of non-determinism of the automata
+     */
+    long degreeOfNonDeterminism();
+
+    /**
      * Whether the automata is deterministic
      * @return true if deterministic, false if not
      */

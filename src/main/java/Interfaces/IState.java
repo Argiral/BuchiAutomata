@@ -1,5 +1,7 @@
 package Interfaces;
 
+import java.util.List;
+
 public interface IState {
 
     /**
@@ -13,4 +15,12 @@ public interface IState {
      * @return The name of the state
      */
     String getKey();
+
+    /**
+     * Return a list containing the state as element
+     * @return A list with the state
+     */
+    List<IState> toList();
+
+
 }

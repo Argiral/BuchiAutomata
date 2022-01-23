@@ -65,6 +65,12 @@ class BuchiAutomataTest {
     }
 
     @Test
+    void degreeOfNonDeterminism() {
+        assertEquals(automataNBA.degreeOfNonDeterminism(), 2);
+        assertEquals(automataDBA.degreeOfNonDeterminism(), 1);
+    }
+
+    @Test
     void isDeterministic() {
         assertFalse(automataNBA.isDeterministic());
         assertTrue(automataDBA.isDeterministic());

@@ -7,7 +7,6 @@ import Interfaces.ITransition;
 import Model.BuchiAutomata;
 import Model.State;
 import Model.Transition;
-import com.sun.scenario.effect.impl.state.LinearConvolveKernel;
 import guru.nidi.graphviz.attribute.*;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
@@ -28,11 +27,11 @@ import static guru.nidi.graphviz.model.Factory.*;
 public class AutomataViewer {
     public static Graph createExampleGraph() {
         Node
-                q0 = node("q0"),
-                q1 = node("q1"),
-                q2 = node("q2"),
-                q3 = node("q3"),
-                q4 = node("q4");
+                q0 = node("q0").with(Style.FILLED, Color.AQUAMARINE4),
+                q1 = node("q1").with(Shape.SEPTAGON),
+                q2 = node("q2").with(Style.DIAGONALS, Style.lineWidth(3), Color.LIGHTGRAY),
+                q3 = node("q3").with(Style.lineWidth(3)),
+                q4 = node("q4").with(Style.DASHED);
 
         return graph("automata_example").directed().with(
                 q0.link(
@@ -63,7 +62,19 @@ public class AutomataViewer {
 
         // Create nodes (map from state to node)
         for (IState s: automata.getStates()) {
-            dict.put(s, node(s.getKey()));
+            if (s.isFinal()) {
+                if (s.equals(automata.getInitialState())) {
+                    dict.put(s, node(s.getKey()).with(Style.lineWidth(3), Shape.SEPTAGON));
+                } else {
+                    dict.put(s, node(s.getKey()).with(Style.lineWidth(3)));
+                }
+            } else {
+                if (s.equals(automata.getInitialState())) {
+                    dict.put(s, node(s.getKey()).with(Shape.SEPTAGON));
+                } else {
+                    dict.put(s, node(s.getKey()));
+                }
+            }
         }
 
         List<LinkSource> lksources = new LinkedList<>();
@@ -99,8 +110,8 @@ public class AutomataViewer {
     }
 
     public static void main(String[] args) throws IOException {
-        Graphviz.fromGraph(createExampleGraph()).width(900).render(Format.PNG).toFile(new File("graph/example_automata.png"));
-        Graphviz.fromGraph(createGraph(createTestNBA())).width(1500).render(Format.PNG).toFile(new File("graph/example_NBA2.png"));
+//        Graphviz.fromGraph(createExampleGraph()).width(900).render(Format.PNG).toFile(new File("graph/example_automata.png"));
+        Graphviz.fromGraph(createGraph(createTestNBA())).width(1500).render(Format.PNG).toFile(new File("graph/example_NBA.png"));
 //        Graphviz.fromGraph(createGraph(createTestDBA())).width(2500).render(Format.SVG).toFile(new File("graph/example_DBA.svg"));
     }
 //
