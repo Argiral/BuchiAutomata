@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<automata>
+  <states>
+    <state name="0" final="true" />
+    <state name="1" final="false" />
+    <state name="2" final="false" />
+    <state name="3" final="false" />
+    <state name="4" final="false" />
+    <state name="5" final="false" />
+    <state name="6" final="true" />
+  </states>
+  <transitions>
+    <transition source="0" destination="0" symbol="a" />
+    <transition source="0" destination="1" symbol="a" />
+    <transition source="0" destination="2" symbol="b" />
+    <transition source="0" destination="3" symbol="a" />
+    <transition source="0" destination="4" symbol="b" />
+    <transition source="0" destination="5" symbol="a" />
+    <transition source="4" destination="5" symbol="a" />
+    <transition source="4" destination="6" symbol="a" />
+    <transition source="3" destination="4" symbol="b" />
+    <transition source="2" destination="3" symbol="a" />
+    <transition source="2" destination="6" symbol="a" />
+    <transition source="1" destination="2" symbol="b" />
+    <transition source="6" destination="2" symbol="b" />
+    <transition source="6" destination="4" symbol="b" />
+  </transitions>
+</automata>
