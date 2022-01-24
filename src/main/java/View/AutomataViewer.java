@@ -4,13 +4,11 @@ import Interfaces.IAutomata;
 
 import Interfaces.IState;
 import Interfaces.ITransition;
-import Model.BuchiAutomata;
-import Model.State;
-import Model.Transition;
 import guru.nidi.graphviz.attribute.*;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.model.*;
+import javafx.util.Pair;
 
 import java.io.File;
 import java.io.IOException;
@@ -81,11 +79,18 @@ public class AutomataViewer {
         // Create links
         Map<IState, List<ITransition>> transitionMap = automata.getTransitionsMap();
         for (IState s : transitionMap.keySet()) {
-            LinkTarget[] lktarget = new LinkTarget[transitionMap.get(s).size()];
+//            LinkTarget[] lktarget = new LinkTarget[transitionMap.get(s).size()];
+//            int i = 0;
+//            for (ITransition t : transitionMap.get(s)) {
+//                lktarget[i] =  to(dict.get(t.getDestination())).with(Label.of("" + t.getSymbol()));
+//                i++;
+//            }
+            // Merge transitions with same source and destination
+            List<MyPair> newTransitionsList = mergeTransitions(transitionMap.get(s));
+            LinkTarget[] lktarget = new LinkTarget[newTransitionsList.size()];
             int i = 0;
-            for (ITransition t : transitionMap.get(s)) {
-                lktarget[i] =  to(dict.get(t.getDestination())).with(Label.of("" + t.getSymbol()));
-                i++;
+            for (MyPair p : newTransitionsList) {
+                lktarget[i++] =  to(dict.get(p.state)).with(Label.of("" + p.transitionValue));
             }
             lksources.add(dict.get(s).link(lktarget));
         }
@@ -108,47 +113,80 @@ public class AutomataViewer {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-//        Graphviz.fromGraph(createExampleGraph()).width(900).render(Format.PNG).toFile(new File("graph/example_automata.png"));
-        Graphviz.fromGraph(createGraph(createTestNBA())).width(1500).render(Format.PNG).toFile(new File("graph/example_NBA.png"));
-//        Graphviz.fromGraph(createGraph(createTestDBA())).width(2500).render(Format.SVG).toFile(new File("graph/example_DBA.svg"));
+    private static List<MyPair> mergeTransitions(List<ITransition> transitions) {
+        List<MyPair> list = new LinkedList<>();
+        if (transitions == null) {
+            return list;
+        }
+        for (ITransition t : transitions) {
+            // Create new pair
+            MyPair newPair = new MyPair(t.getDestination(), t.getSymbol() + "");
+            // Check if a transition to the same state exist
+            boolean found = false;
+            for (MyPair listPair : list) {
+                if (listPair.state.equals(newPair.state)) {
+                    listPair.transitionValue += "," + newPair.transitionValue;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                list.add(newPair);
+            }
+        }
+        return list;
     }
-//
-//
-    static IAutomata createTestNBA() {
-        // Create non-deterministic automata
-        IAutomata automataNBA = new BuchiAutomata();
 
-        // Add states
-        State s0 = new State("q0");
-        automataNBA.addState(s0);
-        State s1 = new State("q1");
-        automataNBA.addState(s1);
-        State s2 = new State("q2");
-        automataNBA.addState(s2);
-        State s3 = new State("q3");
-        automataNBA.addState(s3);
-        State s4 = new State("q4", true);
-        automataNBA.addState(s4);
-
-        // Set initial state
-        automataNBA.setInitialState(s0);
-
-        // Add transitions
-        automataNBA.addTransition(new Transition(s0, 'a', s1));
-        automataNBA.addTransition(new Transition(s0, 'b', s2));
-        automataNBA.addTransition(new Transition(s1, 'b', s1));
-        automataNBA.addTransition(new Transition(s1, 'a', s3));
-        automataNBA.addTransition(new Transition(s2, 'a', s2));
-        automataNBA.addTransition(new Transition(s2, 'b', s4));
-        automataNBA.addTransition(new Transition(s3, 'b', s3));
-        automataNBA.addTransition(new Transition(s3, 'a', s4));
-        automataNBA.addTransition(new Transition(s3, 'b', s4));
-        automataNBA.addTransition(new Transition(s4, 'a', s4));
-        automataNBA.addTransition(new Transition(s4, 'b', s4));
-
-        return automataNBA;
+    private static class MyPair {
+        IState state;
+        String transitionValue;
+        MyPair(IState state, String transitionValue) {
+            this.state = state;
+            this.transitionValue = transitionValue;
+        }
     }
+
+//    public static void main(String[] args) throws IOException {
+////        Graphviz.fromGraph(createExampleGraph()).width(900).render(Format.PNG).toFile(new File("graph/example_automata.png"));
+//        Graphviz.fromGraph(createGraph(createTestNBA())).width(1500).render(Format.PNG).toFile(new File("graph/example_NBA.png"));
+////        Graphviz.fromGraph(createGraph(createTestDBA())).width(2500).render(Format.SVG).toFile(new File("graph/example_DBA.svg"));
+//    }
+////
+////
+//    static IAutomata createTestNBA() {
+//        // Create non-deterministic automata
+//        IAutomata automataNBA = new BuchiAutomata();
+//
+//        // Add states
+//        State s0 = new State("q0");
+//        automataNBA.addState(s0);
+//        State s1 = new State("q1");
+//        automataNBA.addState(s1);
+//        State s2 = new State("q2");
+//        automataNBA.addState(s2);
+//        State s3 = new State("q3");
+//        automataNBA.addState(s3);
+//        State s4 = new State("q4", true);
+//        automataNBA.addState(s4);
+//
+//        // Set initial state
+//        automataNBA.setInitialState(s0);
+//
+//        // Add transitions
+//        automataNBA.addTransition(new Transition(s0, 'a', s1));
+//        automataNBA.addTransition(new Transition(s0, 'b', s2));
+//        automataNBA.addTransition(new Transition(s1, 'b', s1));
+//        automataNBA.addTransition(new Transition(s1, 'a', s3));
+//        automataNBA.addTransition(new Transition(s2, 'a', s2));
+//        automataNBA.addTransition(new Transition(s2, 'b', s4));
+//        automataNBA.addTransition(new Transition(s3, 'b', s3));
+//        automataNBA.addTransition(new Transition(s3, 'a', s4));
+//        automataNBA.addTransition(new Transition(s3, 'b', s4));
+//        automataNBA.addTransition(new Transition(s4, 'a', s4));
+//        automataNBA.addTransition(new Transition(s4, 'b', s4));
+//
+//        return automataNBA;
+//    }
 //
 //    static IAutomata createTestDBA() {
 //        // Create deterministic automata

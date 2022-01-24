@@ -9,7 +9,7 @@ public class TestAlgorithms {
     public static void main(String[] args) {
 //        testReductionDegOfNonDet();
 //        testUnion();
-        testIntersection();
+//        testIntersection();
 //        testFactorySave();
 //        testFactoryLoad();
     }
