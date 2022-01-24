@@ -75,7 +75,7 @@ public class SeriesAutomata {
         automata.addTransition(q1, 'b', q1);
         automata.addTransition(q1, 'a', q2);
         automata.addTransition(q2, 'a', q2);
-        automata.addTransition(q2, 'a', q2);
+        automata.addTransition(q2, 'b', q2);
 
         return automata;
     }

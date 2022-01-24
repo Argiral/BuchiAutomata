@@ -21,7 +21,6 @@ import static guru.nidi.graphviz.model.Factory.*;
 
 // Use code from https://github.com/nidi3/graphviz-java
 // Maven: guru.nidi.graphviz-java:0.8.3
-//  //        guru.nidi.graphviz-rough:0.18.1
 //        ch.qos.logback:logback-classic:0.9.30
 
 public class AutomataViewer {

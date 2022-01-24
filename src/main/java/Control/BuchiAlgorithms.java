@@ -113,51 +113,36 @@ public class BuchiAlgorithms {
         IState start = new State("q0");
         newAutomata.addState(start);
 
+        copyIntoNew(newAutomata, start, first, "_first");
+        copyIntoNew(newAutomata, start, second, "_second");
+
+        return newAutomata;
+    }
+
+    private static void copyIntoNew(IAutomata destAutomata, IState newStart, IAutomata toCopy, String nameAddition) {
+
         // Save the initial states of the original automata
-        IState startA1 = first.getInitialState();
-        IState startA2 = second.getInitialState();
+        IState startOld = toCopy.getInitialState();
 
         // Copy first automata (changing names)
         Map<String, IState> firstStates = new HashMap<>();
-        for (IState s : first.getStates()) {
-            IState nState = new State(s.getKey() + "_first", s.isFinal());
-            newAutomata.addState(nState);
+        for (IState s : toCopy.getStates()) {
+            IState nState = new State(s.getKey() + nameAddition, s.isFinal());
+            destAutomata.addState(nState);
             // Keep track of changes (to easier add transitions)
             firstStates.put(s.getKey(), nState);
         }
 
-        for (ITransition t : first.getTransitionsList()) {
+        for (ITransition t : toCopy.getTransitionsList()) {
             // Use firstStates dictionary to retrive new state from old label
-            newAutomata.addTransition(firstStates.get(t.getSource().getKey()), t.getSymbol(), firstStates.get(t.getDestination().getKey()));
+            destAutomata.addTransition(firstStates.get(t.getSource().getKey()), t.getSymbol(), firstStates.get(t.getDestination().getKey()));
 
             // Add transitions from new starting state
-            if (t.getSource().equals(startA1)) {
+            if (t.getSource().equals(startOld)) {
                 // Add transition from the new starting state
-                newAutomata.addTransition(start, t.getSymbol(), firstStates.get(t.getDestination().getKey()));
+                destAutomata.addTransition(newStart, t.getSymbol(), firstStates.get(t.getDestination().getKey()));
             }
         }
-
-        // Copy second automata (changing names)
-        Map<String, IState> secondStates = new HashMap<>();
-        for (IState s : second.getStates()) {
-            IState nState = new State(s.getKey() + "_second", s.isFinal());
-            newAutomata.addState(nState);
-            // Keep track of changes (to easier add transitions)
-            secondStates.put(s.getKey(), nState);
-        }
-
-        for (ITransition t : second.getTransitionsList()) {
-            // Use firstStates dictionary to retrive new state from old label
-            newAutomata.addTransition(secondStates.get(t.getSource().getKey()), t.getSymbol(), secondStates.get(t.getDestination().getKey()));
-
-            // Add transitions from new starting state
-            if (t.getSource().equals(startA2)) {
-                // Add transition from the new starting state
-                newAutomata.addTransition(start, t.getSymbol(), secondStates.get(t.getDestination().getKey()));
-            }
-        }
-
-        return newAutomata;
     }
 
     public static IAutomata intersection(IAutomata first, IAutomata second) {
@@ -176,14 +161,14 @@ public class BuchiAlgorithms {
     }
 
     private static IAutomata complementDBA(IAutomata automata) {
-        // TODO implement
+        // TODO implement complement DBA
         assert automata.isDeterministic();
         System.err.println("Not yet implemented!");
         return null;
     }
 
     private static IAutomata complementNBA(IAutomata automata) {
-        // TODO implement
+        // TODO implement complement NBA
         System.err.println("Not yet implemented!");
         return null;
     }

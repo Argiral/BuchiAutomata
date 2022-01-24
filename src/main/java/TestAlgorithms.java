@@ -1,13 +1,15 @@
 import Control.BuchiAlgorithms;
 import Interfaces.IAutomata;
+import Model.AutomataFactory;
 import View.AutomataViewer;
 
 import Model.SeriesAutomata;
 
 public class TestAlgorithms {
     public static void main(String[] args) {
-        testReductionDegOfNonDet();
-        testUnion();
+//        testReductionDegOfNonDet();
+//        testUnion();
+        testFactorySave();
     }
 
     private static void testReductionDegOfNonDet() {
@@ -15,8 +17,8 @@ public class TestAlgorithms {
         IAutomata degReduction = BuchiAlgorithms.reduceDegOfNonDeterminism(SeriesAutomata.s2e2());
 
         // Save images
-        AutomataViewer.printAutomata(SeriesAutomata.s2e2(), "graph/s2/2.svg");
-        AutomataViewer.printAutomata(degReduction, "graph/s2/degReduction.svg");
+        AutomataViewer.printAutomata(SeriesAutomata.s2e2(), "data/graph/s2/2.svg");
+        AutomataViewer.printAutomata(degReduction, "data/graph/s2/degReduction.svg");
 
         // Print statistics
         System.out.println("DEGREE OF NON-DETERMINISM REDUCTION");
@@ -29,8 +31,14 @@ public class TestAlgorithms {
         IAutomata union = BuchiAlgorithms.union(SeriesAutomata.s2ex4a1(), SeriesAutomata.s2ex4a2());
 
         // Save images
-        AutomataViewer.printAutomata(SeriesAutomata.s2ex4a1(), "graph/s2/4a.svg");
-        AutomataViewer.printAutomata(SeriesAutomata.s2ex4a2(), "graph/s2/4b.svg");
-        AutomataViewer.printAutomata(union, "graph/s2/4_union.svg");
+        AutomataViewer.printAutomata(SeriesAutomata.s2ex4a1(), "data/graph/s2/4a.svg");
+        AutomataViewer.printAutomata(SeriesAutomata.s2ex4a2(), "data/graph/s2/4b.svg");
+        AutomataViewer.printAutomata(union, "data/graph/s2/4_union.svg");
+    }
+
+    private static void testFactorySave() {
+        IAutomata automata = SeriesAutomata.s2e2();
+
+        AutomataFactory.instance().save(automata, "data/automata/s2e2.xml");
     }
 }
