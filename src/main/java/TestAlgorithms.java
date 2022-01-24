@@ -1,7 +1,5 @@
 import Control.BuchiAlgorithms;
 import Interfaces.IAutomata;
-import Interfaces.IState;
-import Interfaces.ITransition;
 import View.AutomataViewer;
 
 import Model.SeriesAutomata;

@@ -113,6 +113,21 @@ class BuchiAutomataTest {
         assertEquals(automataDBA.numberOfTransitions(), 7);
     }
 
+    @Test
+    void removeState() {
+        assertTrue(automataNBA.removeState("q2"));
+        assertEquals(automataNBA.numberOfStates(), 4);
+        assertEquals(automataNBA.numberOfTransitions(), 8);
+    }
+
+    @Test
+    void removeTransition() {
+        assertFalse(automataNBA.isDeterministic());
+        assertTrue(automataNBA.removeTransition(automataNBA.getStateByKey("q3"), 'b', automataNBA.getStateByKey("q3")));
+        assertEquals(automataNBA.numberOfTransitions(), 10);
+        assertTrue(automataNBA.isDeterministic());
+    }
+
 
     void createTestNBA() {
         // Create non-deterministic automata

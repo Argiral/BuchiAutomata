@@ -56,6 +56,26 @@ public class State implements IState {
         return l;
     }
 
+    /**
+     * Rename the state
+     *
+     * @param name The new name of the state
+     */
+    @Override
+    public void rename(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Set state as final/non-final
+     *
+     * @param isFinal True if the state is to be set final, false if non-final
+     */
+    @Override
+    public void setFinal(boolean isFinal) {
+        this.isFinal = isFinal;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

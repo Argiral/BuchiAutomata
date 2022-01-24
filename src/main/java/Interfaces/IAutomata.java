@@ -13,12 +13,44 @@ public interface IAutomata {
     void addState(IState state);
 
     /**
+     * Remove a state from the automata, and
+     * all the transitions concerning this state
+     * @param state The state to remove
+     * @return True if the state existed in the automata, else false
+     */
+    boolean removeState(IState state);
+
+    /**
+     * Remove a state from the automata, and
+     * all the transitions concerning this state
+     * @param stateKey The key (name) of the state
+     * @return True if the state existed in the automata, else false
+     */
+    boolean removeState(String stateKey);
+
+    /**
      * Add a new transition to the automata
      * @param from The origin state
      * @param symbol The transition symbol
      * @param to The destination state
      */
     void addTransition(IState from, char symbol, IState to);
+
+    /**
+     * Remove a transition from the automata
+     * @param transition The transition to remove
+     * @return True if the transition existed in the automata, else false
+     */
+    boolean removeTransition(ITransition transition);
+
+    /**
+     * Remove a transition from the automata
+     * @param source The source state
+     * @param symbol The transition symbol
+     * @param destination The destination state
+     * @return True if the transition existed in the automata, else false
+     */
+    boolean removeTransition(IState source, char symbol, IState destination);
 
     /**
      * Add the initial state. If there is already an initial state, it will be replaced

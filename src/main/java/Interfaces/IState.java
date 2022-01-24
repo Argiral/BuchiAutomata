@@ -22,5 +22,16 @@ public interface IState {
      */
     List<IState> toList();
 
+    /**
+     * Rename the state
+     * @param name The new name of the state
+     */
+    void rename(String name);
+
+    /**
+     * Set state as final/non-final
+     * @param isFinal True if the state is to be set final, false if non-final
+     */
+    void setFinal(boolean isFinal);
 
 }

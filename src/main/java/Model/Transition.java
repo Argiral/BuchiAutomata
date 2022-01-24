@@ -3,6 +3,8 @@ package Model;
 import Interfaces.IState;
 import Interfaces.ITransition;
 
+import java.util.Objects;
+
 public class Transition implements ITransition {
     IState from, to;
     char symbol;
@@ -41,5 +43,18 @@ public class Transition implements ITransition {
     @Override
     public char getSymbol() {
         return this.symbol;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transition that = (Transition) o;
+        return symbol == that.symbol && from.equals(that.from) && to.equals(that.to);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(from, to, symbol);
     }
 }

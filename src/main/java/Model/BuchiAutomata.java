@@ -37,6 +37,43 @@ public class BuchiAutomata implements IAutomata {
     }
 
     /**
+     * Remove a state from the automata, and
+     * all the transitions concerning this state
+     *
+     * @param state The state to remove
+     * @return True if the state existed in the automata, else false
+     */
+    @Override
+    public boolean removeState(IState state) {
+        boolean exist = this.states.remove(state);
+
+        // Remove all the related transitions
+        for (ITransition t : this.getTransitionsList()) {
+            if (t.getSource().equals(state) || t.getDestination().equals(state)) {
+                removeTransition(t);
+            }
+        }
+
+        return exist;
+    }
+
+    /**
+     * Remove a state from the automata, and
+     * all the transitions concerning this state
+     *
+     * @param stateKey The key (name) of the state
+     * @return True if the state existed in the automata, else false
+     */
+    @Override
+    public boolean removeState(String stateKey) {
+        IState state = getStateByKey(stateKey);
+        if (state == null) {
+            return false;
+        }
+        return removeState(state);
+    }
+
+    /**
      * Add a new transition to the automata
      *
      * @param from   The origin state
@@ -46,6 +83,39 @@ public class BuchiAutomata implements IAutomata {
     @Override
     public void addTransition(IState from, char symbol, IState to) {
         addTransition(new Transition(from, symbol, to));
+    }
+
+    /**
+     * Remove a transition from the automata
+     *
+     * @param transition The transition to remove
+     * @return True if the transition existed in the automata, else false
+     */
+    @Override
+    public boolean removeTransition(ITransition transition) {
+        List<ITransition> ts = this.getTransitionsMap().get(transition.getSource());
+        if (ts != null) {
+            boolean removed =  ts.remove(transition);
+            // Remove map entry if necessary
+            if (this.getTransitionsMap().get(transition.getSource()).isEmpty()) {
+                this.transitions.remove(transition.getSource());
+            }
+            return removed;
+        }
+        return false;
+    }
+
+    /**
+     * Remove a transition from the automata
+     *
+     * @param source      The source state
+     * @param symbol      The transition symbol
+     * @param destination The destination state
+     * @return True if the transition existed in the automata, else false
+     */
+    @Override
+    public boolean removeTransition(IState source, char symbol, IState destination) {
+        return removeTransition(new Transition(source, symbol, destination));
     }
 
     /**
