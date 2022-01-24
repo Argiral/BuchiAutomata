@@ -5,6 +5,8 @@ import Interfaces.IState;
 import Interfaces.ITransition;
 import Model.BuchiAutomata;
 import Model.State;
+import com.sun.scenario.effect.impl.state.LinearConvolveKernel;
+import javafx.util.Pair;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,6 +19,7 @@ public class BuchiAlgorithms {
         // Keep track of the nodes to complete
         Set<String> toCheck = new HashSet<>();
         Set<String> alreadyChecked = new HashSet<>();
+
         // Keep track of the lists of states represented by the new states
         Map<String, List<IState>> nameToList = new HashMap<>();
 
@@ -119,6 +122,126 @@ public class BuchiAlgorithms {
         return newAutomata;
     }
 
+
+    public static IAutomata intersection(IAutomata first, IAutomata second) {
+        // TODO correct intersection
+        IAutomata newAutomata = new BuchiAutomata();
+
+        // Keep track of the nodes to complete
+        Set<String> toCheck = new HashSet<>();
+        Set<String> alreadyChecked = new HashSet<>();
+
+        // Keep track of the lists of states represented by the new states
+        Map<String, Pair<IState, IState>> nameToList = new HashMap<>();
+
+        // Initial state of the new automata
+        IState newq0 = new State("{" + first.getInitialState().getKey() + "," + second.getInitialState().getKey() + ",0}", false);
+        newAutomata.addState(newq0);
+
+        // Add the initial state to the list of states to check
+        toCheck.add(newq0.getKey());
+        nameToList.put(newq0.getKey(), new Pair<>(first.getInitialState(), second.getInitialState()));
+
+        // Alphabets union
+        Set<Character> newAlphabet = first.getAlphabet();
+        newAlphabet.addAll(second.getAlphabet());
+
+        // Construct every new state
+        while (!toCheck.isEmpty()) {
+            // Get next state to construct
+            String stateToCheckName = toCheck.iterator().next();
+            IState stateToCheck = newAutomata.getStateByKey(stateToCheckName);
+            assert stateToCheck != null;
+            // Get label
+            int label = Integer.parseInt(stateToCheckName.split(",")[2].charAt(0) + "");
+
+            // Get currents states in old automatas
+            IState s1 = nameToList.get(stateToCheckName).getKey();
+            IState s2 = nameToList.get(stateToCheckName).getValue();
+
+            // For every symbol
+            for (char symbol : newAlphabet) {
+                // Get all the transitions from the given states and with the current symbol
+                List<ITransition> t1 = first.getTransitionsMap().get(s1).stream().filter(s -> s.getSymbol() == symbol).collect(Collectors.toList());
+                List<ITransition> t2 = second.getTransitionsMap().get(s2).stream().filter(s -> s.getSymbol() == symbol).collect(Collectors.toList());
+
+                // For all combinations of transitions
+                for (Pair<ITransition, ITransition> tr : getCombinations(t1, t2)) {
+                    // Get the destination states
+                    IState newState1 = tr.getKey().getDestination();
+                    IState newState2 = tr.getValue().getDestination();
+
+                    // Determine new label
+                    int newLabel;
+                    switch (label) {
+                        case 0:
+                        case 2:
+                            if (newState1.isFinal()) {
+                                // Shortcuts: in the original algorithm, here -> 1
+                                // But make sens to check if both are already final
+                                if (newState2.isFinal()) {
+                                    newLabel = 2;
+                                } else {
+                                    newLabel = 1;
+                                }
+                            } else {
+                                newLabel = 0;
+                            }
+                            break;
+                        case 1:
+                            if (newState2.isFinal()) {
+                                newLabel = 2;
+                            } else {
+                                newLabel = 1;
+                            }
+                            break;
+                        default:
+                            newLabel = 9;
+                            System.err.println("ERROR: Label not correctly identified, problems are to be expected\n (intersection algorithm)");
+                            break;
+                    }
+                    // Create state in the new automata if missing
+                    String destStateName = "{" + newState1.getKey() + "," + newState2.getKey() + "," + newLabel + "}";
+                    IState newState = newAutomata.getStateByKey(destStateName);
+                    if (newState == null) {
+                        newState = new State(destStateName, newLabel == 2);
+                        // Add to automata
+                        newAutomata.addState(newState);
+                        // Add state to list toCheck
+                        toCheck.add(destStateName);
+                        // Update dictionary
+                        nameToList.put(destStateName, new Pair<>(newState1, newState2));
+                    }
+                    // Add transition
+                    newAutomata.addTransition(stateToCheck, symbol, newState);
+                }
+            }
+
+            // Remove state from list to check
+            toCheck.remove(stateToCheckName);
+            alreadyChecked.add(stateToCheckName);
+        }
+
+        return newAutomata;
+    }
+
+
+
+    public static IAutomata complement(IAutomata automata) {
+        // For deterministic BA, complement is much easier
+        if (automata.isDeterministic()) {
+            return complementDBA(automata);
+        } else {
+            return complementNBA(automata);
+        }
+    }
+
+    public static IAutomata removeDeadEnds(IAutomata automata) {
+        // TODO implement remove dead ends
+        return automata;
+    }
+
+
     private static void copyIntoNew(IAutomata destAutomata, IState newStart, IAutomata toCopy, String nameAddition) {
 
         // Save the initial states of the original automata
@@ -145,21 +268,6 @@ public class BuchiAlgorithms {
         }
     }
 
-    public static IAutomata intersection(IAutomata first, IAutomata second) {
-        // TODO implement intersection
-        System.err.println("Not yet implemented!");
-        return null;
-    }
-
-    public static IAutomata complement(IAutomata automata) {
-        // For deterministic BA, complement is much easier
-        if (automata.isDeterministic()) {
-            return complementDBA(automata);
-        } else {
-            return complementNBA(automata);
-        }
-    }
-
     private static IAutomata complementDBA(IAutomata automata) {
         // TODO implement complement DBA
         assert automata.isDeterministic();
@@ -171,5 +279,16 @@ public class BuchiAlgorithms {
         // TODO implement complement NBA
         System.err.println("Not yet implemented!");
         return null;
+    }
+
+    private static List<Pair<ITransition, ITransition>> getCombinations(List<ITransition> firstTransitions, List<ITransition> secondTransitions) {
+        List<Pair<ITransition, ITransition>> lst = new LinkedList<>();
+        for (ITransition t1 : firstTransitions) {
+            for (ITransition t2 : secondTransitions) {
+                lst.add(new Pair<>(t1, t2));
+            }
+        }
+
+        return lst;
     }
 }

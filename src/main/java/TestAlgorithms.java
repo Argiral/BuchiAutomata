@@ -9,8 +9,9 @@ public class TestAlgorithms {
     public static void main(String[] args) {
 //        testReductionDegOfNonDet();
 //        testUnion();
+        testIntersection();
 //        testFactorySave();
-        testFactoryLoad();
+//        testFactoryLoad();
     }
 
     private static void testReductionDegOfNonDet() {
@@ -35,6 +36,16 @@ public class TestAlgorithms {
         AutomataViewer.printAutomata(SeriesAutomata.s2ex4a1(), "data/graph/s2/4a.svg");
         AutomataViewer.printAutomata(SeriesAutomata.s2ex4a2(), "data/graph/s2/4b.svg");
         AutomataViewer.printAutomata(union, "data/graph/s2/4_union.svg");
+    }
+
+    private static void testIntersection() {
+        // Union of two BA
+        IAutomata union = BuchiAlgorithms.intersection(SeriesAutomata.s2ex4a1(), SeriesAutomata.s2ex4a2());
+
+        // Save images
+        AutomataViewer.printAutomata(SeriesAutomata.s2ex4a1(), "data/graph/s2/4a.svg");
+        AutomataViewer.printAutomata(SeriesAutomata.s2ex4a2(), "data/graph/s2/4b.svg");
+        AutomataViewer.printAutomata(union, "data/graph/s2/4_intersection.svg");
     }
 
     private static void testFactorySave() {
