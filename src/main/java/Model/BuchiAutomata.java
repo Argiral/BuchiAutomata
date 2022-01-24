@@ -86,6 +86,34 @@ public class BuchiAutomata implements IAutomata {
     }
 
     /**
+     * Add a new transition to the automata
+     */
+    public void addTransition(ITransition transition) {
+        // Allow to add transition with null state, but print a warning
+        if (transition.getSource() == null || transition.getDestination() == null) {
+            String n1 = transition.getSource() == null ? "null" : transition.getSource().getKey();
+            String n2 = transition.getDestination() == null ? "null" : transition.getDestination().getKey();
+            System.err.println("WARNING: adding transition with null state (" + n1 + " - " + transition.getSymbol() + " - " + n2 + ")");
+        }
+
+        IState from = transition.getSource();
+
+        // If the key is already present, update the list
+        if (this.transitions.containsKey(from)) {
+            this.transitions.get(from).add(transition);
+        // If the key is absent, insert new (with new list)
+        } else {
+            List<ITransition> newList = new LinkedList<>();
+            newList.add(transition);
+            this.transitions.put(from, newList);
+        }
+
+        // If necessary, add transition symbol to the alphabet
+        // Since it is a set, no need to check if already present -> set discards duplicates
+        this.alphabet.add(transition.getSymbol());
+    }
+
+    /**
      * Remove a transition from the automata
      *
      * @param transition The transition to remove
@@ -116,28 +144,6 @@ public class BuchiAutomata implements IAutomata {
     @Override
     public boolean removeTransition(IState source, char symbol, IState destination) {
         return removeTransition(new Transition(source, symbol, destination));
-    }
-
-    /**
-     * Add a new transition to the automata
-     */
-    public void addTransition(ITransition transition) {
-        IState from = transition.getSource();
-
-        // If the key is already present, update the list
-        if (this.transitions.containsKey(from)) {
-            this.transitions.get(from).add(transition);
-        // If the key is absent, insert new (with new list)
-        } else {
-            List<ITransition> newList = new LinkedList<>();
-            newList.add(transition);
-            this.transitions.put(from, newList);
-        }
-
-        // If necessary, add transition symbol to the alphabet
-        // Since it is a set, no need to check if already present -> set discards duplicates
-        this.alphabet.add(transition.getSymbol());
-
     }
 
     /**

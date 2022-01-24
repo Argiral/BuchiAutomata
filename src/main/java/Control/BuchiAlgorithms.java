@@ -5,7 +5,6 @@ import Interfaces.IState;
 import Interfaces.ITransition;
 import Model.BuchiAutomata;
 import Model.State;
-import com.sun.scenario.effect.impl.state.LinearConvolveKernel;
 import javafx.util.Pair;
 
 import java.util.*;
@@ -89,27 +88,6 @@ public class BuchiAlgorithms {
         return newAutomata;
     }
 
-    private static void create_new_state(IAutomata newAutomata, Set<String> toCheck, Set<String> alreadyChecked, Map<String, List<IState>> nameToList, IState newSource, char symbol, Set<IState> reachable_states, String new_state_key, IState new_state) {
-        if (!reachable_states.isEmpty()) {
-            // Add state to automata
-            if (!newAutomata.getStates().contains(new_state)) {
-                newAutomata.addState(new_state);
-            }
-
-            // Update map
-            nameToList.put(new_state_key, new LinkedList<>(reachable_states));
-
-            // Add to set to check
-            if (!alreadyChecked.contains(new_state_key)) {
-                toCheck.add(new_state_key);
-            }
-
-            // Add new transition
-            newAutomata.addTransition(newSource, symbol, new_state);
-        }
-    }
-
-
     public static IAutomata union(IAutomata first, IAutomata second) {
         // Generate new automata (and new initial state)
         IAutomata newAutomata = new BuchiAutomata();
@@ -121,7 +99,6 @@ public class BuchiAlgorithms {
 
         return newAutomata;
     }
-
 
     public static IAutomata intersection(IAutomata first, IAutomata second) {
         IAutomata newAutomata = new BuchiAutomata();
@@ -224,8 +201,6 @@ public class BuchiAlgorithms {
         return newAutomata;
     }
 
-
-
     public static IAutomata complement(IAutomata automata) {
         // For deterministic BA, complement is much easier
         if (automata.isDeterministic()) {
@@ -233,6 +208,83 @@ public class BuchiAlgorithms {
         } else {
             return complementNBA(automata);
         }
+    }
+
+    public static IAutomata complementDBA(IAutomata automata) {
+        assert automata.isDeterministic();
+
+        // Create new automata
+        IAutomata newAutomata = new BuchiAutomata();
+
+        // Keep a map of the new states for faster retrieval
+        Map<String, IState> newStatesMap = new HashMap<>();
+
+        // Create new states
+        for (IState s : automata.getStates()) {
+            // Copy all the states and make not final
+            IState origState = new State(s.getKey(), false);
+            newAutomata.addState(origState);
+            newStatesMap.put(s.getKey(), origState);
+
+            // Copy non-final states and make final
+            if (!s.isFinal()) {
+                IState normalState = new State(s.getKey() + "_new", true);
+                newAutomata.addState(normalState);
+                newStatesMap.put(s.getKey() + "_new", normalState);
+            }
+        }
+
+        // Create new transitions
+        for (ITransition t : automata.getTransitionsList()) {
+            // Copy all the original transitions
+            newAutomata.addTransition(newStatesMap.get(t.getSource().getKey()), t.getSymbol(), newStatesMap.get(t.getDestination().getKey()));
+
+            // Create new transitions to the new final states (previous non-final)
+            if (!t.getDestination().isFinal()) {
+                newAutomata.addTransition(newStatesMap.get(t.getSource().getKey()), t.getSymbol(), newStatesMap.get(t.getDestination().getKey() + "_new"));
+
+                // Create transitions between 2 final states (in the new automata)
+                if (!t.getSource().isFinal()) {
+                    newAutomata.addTransition(newStatesMap.get(t.getSource().getKey() + "_new"), t.getSymbol(), newStatesMap.get(t.getDestination().getKey() + "_new"));
+                }
+            }
+        }
+
+        // Ev. add trap state
+        IState trapState = new State("trap", true);
+        newAutomata.addState(trapState);
+
+        boolean usedTrap = false;
+        // Add only transitions from original states
+        // Transitions from new states would not be wrong but are not necessary
+        for (IState s : automata.getStates()) {
+            IState newState = newStatesMap.get(s.getKey());
+            // Check that every state has a transition for every symbol
+            for (char symbol : newAutomata.getAlphabet()) {
+                // If no transition with the given symbol available, add it (to trap state)
+                if (newAutomata.getTransitionsMap().get(newState).stream().noneMatch(t -> t.getSymbol() == symbol)) {
+                    usedTrap = true;
+                    newAutomata.addTransition(newState, symbol, trapState);
+                }
+            }
+        }
+
+        // Remove trap state if not necessary, else add loops
+        if (!usedTrap) {
+            newAutomata.removeState(trapState);
+        } else {
+            for (char symbol : newAutomata.getAlphabet()) {
+                newAutomata.addTransition(trapState, symbol, trapState);
+            }
+        }
+
+        return newAutomata;
+    }
+
+    public static IAutomata complementNBA(IAutomata automata) {
+        // TODO implement complement NBA
+        System.err.println("Not yet implemented!");
+        return null;
     }
 
     public static IAutomata removeDeadEnds(IAutomata automata) {
@@ -342,6 +394,28 @@ public class BuchiAlgorithms {
     }
 
 
+    // Helper method for reduceDegOfNonDeterminism()
+    private static void create_new_state(IAutomata newAutomata, Set<String> toCheck, Set<String> alreadyChecked, Map<String, List<IState>> nameToList, IState newSource, char symbol, Set<IState> reachable_states, String new_state_key, IState new_state) {
+        if (!reachable_states.isEmpty()) {
+            // Add state to automata
+            if (!newAutomata.getStates().contains(new_state)) {
+                newAutomata.addState(new_state);
+            }
+
+            // Update map
+            nameToList.put(new_state_key, new LinkedList<>(reachable_states));
+
+            // Add to set to check
+            if (!alreadyChecked.contains(new_state_key)) {
+                toCheck.add(new_state_key);
+            }
+
+            // Add new transition
+            newAutomata.addTransition(newSource, symbol, new_state);
+        }
+    }
+
+    // Helper method for union()
     private static void copyIntoNew(IAutomata destAutomata, IState newStart, IAutomata toCopy, String nameAddition) {
 
         // Save the initial states of the original automata
@@ -368,19 +442,7 @@ public class BuchiAlgorithms {
         }
     }
 
-    private static IAutomata complementDBA(IAutomata automata) {
-        // TODO implement complement DBA
-        assert automata.isDeterministic();
-        System.err.println("Not yet implemented!");
-        return null;
-    }
-
-    private static IAutomata complementNBA(IAutomata automata) {
-        // TODO implement complement NBA
-        System.err.println("Not yet implemented!");
-        return null;
-    }
-
+    // Helper method for intersection()
     private static List<Pair<ITransition, ITransition>> getCombinations(List<ITransition> firstTransitions, List<ITransition> secondTransitions) {
         List<Pair<ITransition, ITransition>> lst = new LinkedList<>();
         for (ITransition t1 : firstTransitions) {
