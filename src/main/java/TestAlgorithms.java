@@ -9,7 +9,8 @@ public class TestAlgorithms {
     public static void main(String[] args) {
 //        testReductionDegOfNonDet();
 //        testUnion();
-        testFactorySave();
+//        testFactorySave();
+        testFactoryLoad();
     }
 
     private static void testReductionDegOfNonDet() {
@@ -39,6 +40,12 @@ public class TestAlgorithms {
     private static void testFactorySave() {
         IAutomata automata = SeriesAutomata.s2e2();
 
-        AutomataFactory.instance().save(automata, "data/automata/s2e2.xml");
+        AutomataFactory.instance().saveToXml(automata, "data/automata/s2e2.xml");
+    }
+
+    private static void testFactoryLoad() {
+        IAutomata automata = AutomataFactory.instance().loadFromXML("data/automata/s2e2.xml");
+
+        AutomataViewer.printAutomata(automata, "data/graph/s2/2_loaded.svg");
     }
 }
