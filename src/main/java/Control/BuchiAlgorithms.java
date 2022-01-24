@@ -241,7 +241,7 @@ public class BuchiAlgorithms {
     }
 
     public static IAutomata greedySubsetConstruction(IAutomata automata) {
-        // TODO implement greedy subset construction
+        // TODO fix greedy subset construction
 
         IAutomata newAutomata = new BuchiAutomata();
 
@@ -284,21 +284,26 @@ public class BuchiAlgorithms {
                 for (List<IState> ls : currentStates) {
                     // Get successors of each element
                     List<IState> reachable = automata.run(symbol, ls);
+
                     // Split into final and non-final (with finals on the right)
                     List<IState> reachable_final = reachable.stream().filter(IState::isFinal).collect(Collectors.toList());
                     List<IState> reachable_normal = reachable.stream().filter(s -> !s.isFinal()).collect(Collectors.toList());
+
                     // Remove states already reached for elements more on the right and add to list
-                    reachable_final.removeAll(alreadyAdded);  // remove duplicates
-                    alreadyAdded.addAll(reachable_final);     // keep track for future duplicates
-                    successors.add(reachable_final);          // add to list as successors
-                    reachable_normal.removeAll(alreadyAdded); // remove duplicates
-                    alreadyAdded.addAll(reachable_normal);    // keep track for future duplicates
-                    successors.add(reachable_normal);         // add to list as successors
+                    reachable_final = new LinkedList<>(new HashSet<>(reachable_final)); // remove duplicates inside list
+                    reachable_final.removeAll(alreadyAdded);    // remove duplicates from other states
+                    alreadyAdded.addAll(reachable_final);       // keep track for future duplicates
+                    successors.add(reachable_final);            // add to list as successors
+                    reachable_normal = new LinkedList<>(new HashSet<>(reachable_normal)); // remove duplicates inside list
+                    reachable_normal.removeAll(alreadyAdded);   // remove duplicates
+                    alreadyAdded.addAll(reachable_normal);      // keep track for future duplicates
+                    successors.add(reachable_normal);           // add to list as successors
                 }
 
                 // Remove empty sets
                 successors.removeIf(List::isEmpty);
 
+                // Reverse again
                 Collections.reverse(successors);
 
                 // If necessary, create new state and add to lists (toCheck, nameToLists)
@@ -385,5 +390,12 @@ public class BuchiAlgorithms {
         }
 
         return lst;
+    }
+
+    private static void printListOfStates(List<IState> list) {
+        for (IState s : list) {
+            System.out.print(s.getKey() + " - ");
+        }
+        System.out.println();
     }
 }

@@ -1,9 +1,17 @@
 import Control.BuchiAlgorithms;
 import Interfaces.IAutomata;
+import Interfaces.IState;
 import Model.AutomataFactory;
+import Model.State;
 import View.AutomataViewer;
 
 import Model.SeriesAutomata;
+import javafx.scene.effect.SepiaTone;
+
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 public class TestAlgorithms {
     public static void main(String[] args) {
@@ -13,6 +21,31 @@ public class TestAlgorithms {
 //        testUnion();
 //        testIntersection();
         testGreedySubsetConstruction();
+
+//
+//        List<IState> list = new LinkedList<>();
+//        list.add(new State("q0"));
+//        list.add(new State("q2"));
+//        list.add(new State("q5", true));
+//
+//        Set<IState> toRemove = new HashSet<>();
+//        toRemove.add(new State("q0"));
+//
+//        System.out.println("List: ");
+//        for (IState s : list) {
+//            System.out.print(s.getKey() + " - ");
+//        }
+//        System.out.println();
+//        System.out.println("To remove: ");
+//        for (IState s : toRemove) {
+//            System.out.print(s.getKey() + " - ");
+//        }
+//        System.out.println();
+//        list.removeAll(toRemove);
+//        System.out.println("Removed: ");
+//        for (IState s : list) {
+//            System.out.print(s.getKey() + " - ");
+//        }
     }
 
     private static void testReductionDegOfNonDet() {
@@ -62,15 +95,30 @@ public class TestAlgorithms {
     }
 
     private static void testGreedySubsetConstruction() {
-        IAutomata automata = SeriesAutomata.s4e1a1();
+//        IAutomata automata1 = SeriesAutomata.s4e1a1();
+//
+//        IAutomata subset1 = BuchiAlgorithms.greedySubsetConstruction(automata1);
+//        System.out.println("GREEDY SUBSET CONSTRUCTION");
+//        System.out.println("A1");
+//        System.out.println(automata1.getStatistics());
+//        System.out.println();
+//        System.out.println(subset1.getStatistics());
+//
+//        AutomataViewer.printAutomata(automata1, "data/graph/s4/1a1.svg");
+//        AutomataViewer.printAutomata(subset1, "data/graph/s4/subset1.svg");
 
-        IAutomata subset = BuchiAlgorithms.greedySubsetConstruction(automata);
-        System.out.println("GREEDY SUBSET CONSTRUCTION");
-        System.out.println(automata.getStatistics());
+
+        IAutomata automata2 = SeriesAutomata.s4e1a2();
+
+        IAutomata subset2 = BuchiAlgorithms.greedySubsetConstruction(automata2);
+
         System.out.println();
-        System.out.println(subset.getStatistics());
+        System.out.println();
+        System.out.println(automata2.getStatistics());
+        System.out.println();
+        System.out.println(subset2.getStatistics());
 
-        AutomataViewer.printAutomata(automata, "data/graph/s4/1a1.svg");
-        AutomataViewer.printAutomata(subset, "data/graph/s4/subset.svg");
+        AutomataViewer.printAutomata(automata2, "data/graph/s4/1a2.svg");
+        AutomataViewer.printAutomata(subset2, "data/graph/s4/subset2.svg");
     }
 }

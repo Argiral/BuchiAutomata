@@ -237,7 +237,8 @@ public class BuchiAutomata implements IAutomata {
             list.addAll(l);
         }
 
-        return list;
+        // Remove duplicates
+        return new ArrayList<>(new HashSet<ITransition>(list));
     }
 
 
