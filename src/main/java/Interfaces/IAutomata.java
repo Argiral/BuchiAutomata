@@ -1,5 +1,6 @@
 package Interfaces;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -133,6 +134,15 @@ public interface IAutomata {
     List<IState> run(String word, IState initialState);
 
     /**
+     * Run the automata on a given string starting from a list of initial states
+     * and return the list of reachable states
+     * @param word The word to read
+     * @param initialStates The list of initial states
+     * @return The list of states that can be reached
+     */
+    List<IState> run(String word, Collection<IState> initialStates);
+
+    /**
      * Read a symbol (char) starting from the initial state
      * and return the list of reachable states
      * @param symbol The char to read
@@ -148,6 +158,15 @@ public interface IAutomata {
      * @return The list of states that can be reached
      */
     List<IState> run(char symbol, IState initialState);
+
+    /**
+     * Read a symbol (char) starting from a list of given states
+     * and return the list of reachable states
+     * @param symbol The char to read
+     * @param initialStates The list of initial states
+     * @return The list of states that can be reached
+     */
+    List<IState> run(char symbol, Collection<IState> initialStates);
 
     /**
      * Indicate the degree of non-determinism

@@ -7,11 +7,12 @@ import Model.SeriesAutomata;
 
 public class TestAlgorithms {
     public static void main(String[] args) {
+//        testFactorySave();
+//        testFactoryLoad();
 //        testReductionDegOfNonDet();
 //        testUnion();
 //        testIntersection();
-//        testFactorySave();
-//        testFactoryLoad();
+        testGreedySubsetConstruction();
     }
 
     private static void testReductionDegOfNonDet() {
@@ -58,5 +59,18 @@ public class TestAlgorithms {
         IAutomata automata = AutomataFactory.instance().loadFromXML("data/automata/s2e2.xml");
 
         AutomataViewer.printAutomata(automata, "data/graph/s2/2_loaded.svg");
+    }
+
+    private static void testGreedySubsetConstruction() {
+        IAutomata automata = SeriesAutomata.s4e1a1();
+
+        IAutomata subset = BuchiAlgorithms.greedySubsetConstruction(automata);
+        System.out.println("GREEDY SUBSET CONSTRUCTION");
+        System.out.println(automata.getStatistics());
+        System.out.println();
+        System.out.println(subset.getStatistics());
+
+        AutomataViewer.printAutomata(automata, "data/graph/s4/1a1.svg");
+        AutomataViewer.printAutomata(subset, "data/graph/s4/subset.svg");
     }
 }

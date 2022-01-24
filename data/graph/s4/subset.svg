@@ -1,0 +1,94 @@
+<svg width="201pt" height="310pt"
+ viewBox="0.00 0.00 200.86 310.40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 306.4)">
+<title>%0</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-306.4 196.8578,-306.4 196.8578,4 -4,4"/>
+<!-- ({q0}) -->
+<g id="node1" class="node">
+<title>({q0})</title>
+<polygon fill="none" stroke="#000000" points="119.3556,-280.3946 111.3768,-295.6228 79.0716,-302.4 46.7664,-295.6228 38.7877,-280.3946 61.1436,-268.1826 96.9997,-268.1826 119.3556,-280.3946"/>
+<text text-anchor="middle" x="79.0716" y="-280.2" font-family="Times,serif" font-size="14.00" fill="#000000">({q0})</text>
+</g>
+<!-- ({q0})&#45;&gt;({q0}) -->
+<g id="edge6" class="edge">
+<title>({q0})&#45;&gt;({q0})</title>
+<path fill="none" stroke="#000000" d="M112.9669,-292.6092C126.3148,-293.0231 137.4634,-290.2867 137.4634,-284.4 137.4634,-279.9034 130.9585,-277.2449 121.9372,-276.4246"/>
+<polygon fill="#000000" stroke="#000000" points="121.856,-272.9225 111.7924,-276.2351 121.7252,-279.9213 121.856,-272.9225"/>
+<text text-anchor="middle" x="145.8207" y="-280.2" font-family="Times,serif" font-size="14.00" fill="#000000">b,c</text>
+</g>
+<!-- ({q0},{q1}) -->
+<g id="node4" class="node">
+<title>({q0},{q1})</title>
+<ellipse fill="none" stroke="#000000" cx="79.0716" cy="-195.6" rx="57.9643" ry="18"/>
+<text text-anchor="middle" x="79.0716" y="-191.4" font-family="Times,serif" font-size="14.00" fill="#000000">({q0},{q1})</text>
+</g>
+<!-- ({q0})&#45;&gt;({q0},{q1}) -->
+<g id="edge5" class="edge">
+<title>({q0})&#45;&gt;({q0},{q1})</title>
+<path fill="none" stroke="#000000" d="M73.4209,-268.1165C71.5772,-262.0117 69.7701,-254.9634 68.857,-248.4 67.8281,-241.0046 67.8281,-238.9954 68.857,-231.6 69.2302,-228.9175 69.7527,-226.154 70.366,-223.4071"/>
+<polygon fill="#000000" stroke="#000000" points="73.7597,-224.2631 72.8805,-213.7049 66.9836,-222.507 73.7597,-224.2631"/>
+<text text-anchor="middle" x="72.1789" y="-235.8" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- ({q0},{q2}) -->
+<g id="node2" class="node">
+<title>({q0},{q2})</title>
+<ellipse fill="none" stroke="#000000" cx="79.0716" cy="-18" rx="57.9643" ry="18"/>
+<text text-anchor="middle" x="79.0716" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">({q0},{q2})</text>
+</g>
+<!-- ({q0},{q2})&#45;&gt;({q0},{q2}) -->
+<g id="edge2" class="edge">
+<title>({q0},{q2})&#45;&gt;({q0},{q2})</title>
+<path fill="none" stroke="#000000" d="M130.7503,-26.1775C144.437,-25.7102 154.8033,-22.9844 154.8033,-18 154.8033,-14.3396 149.2127,-11.8972 140.822,-10.6729"/>
+<polygon fill="#000000" stroke="#000000" points="141.0094,-7.1764 130.7503,-9.8225 140.4204,-14.1516 141.0094,-7.1764"/>
+<text text-anchor="middle" x="163.1606" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">b,c</text>
+</g>
+<!-- ({q0},{q1},{q2}) -->
+<g id="node3" class="node">
+<title>({q0},{q1},{q2})</title>
+<ellipse fill="none" stroke="#000000" cx="79.0716" cy="-106.8" rx="79.1433" ry="18"/>
+<text text-anchor="middle" x="79.0716" y="-102.6" font-family="Times,serif" font-size="14.00" fill="#000000">({q0},{q1},{q2})</text>
+</g>
+<!-- ({q0},{q2})&#45;&gt;({q0},{q1},{q2}) -->
+<g id="edge1" class="edge">
+<title>({q0},{q2})&#45;&gt;({q0},{q1},{q2})</title>
+<path fill="none" stroke="#000000" d="M79.0716,-36.072C79.0716,-48.2243 79.0716,-64.4958 79.0716,-78.368"/>
+<polygon fill="#000000" stroke="#000000" points="75.5717,-78.4005 79.0716,-88.4006 82.5717,-78.4006 75.5717,-78.4005"/>
+<text text-anchor="middle" x="82.1789" y="-58.2" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- ({q0},{q1},{q2})&#45;&gt;({q0},{q2}) -->
+<g id="edge4" class="edge">
+<title>({q0},{q1},{q2})&#45;&gt;({q0},{q2})</title>
+<path fill="none" stroke="#000000" d="M72.8805,-88.6951C71.2315,-83.0344 69.6806,-76.72 68.857,-70.8 67.8281,-63.4046 67.8281,-61.3954 68.857,-54 69.2302,-51.3175 69.7527,-48.554 70.366,-45.8071"/>
+<polygon fill="#000000" stroke="#000000" points="73.7597,-46.6631 72.8805,-36.1049 66.9836,-44.907 73.7597,-46.6631"/>
+<text text-anchor="middle" x="72.1789" y="-58.2" font-family="Times,serif" font-size="14.00" fill="#000000">c</text>
+</g>
+<!-- ({q0},{q1},{q2})&#45;&gt;({q0},{q1},{q2}) -->
+<g id="edge3" class="edge">
+<title>({q0},{q1},{q2})&#45;&gt;({q0},{q1},{q2})</title>
+<path fill="none" stroke="#000000" d="M150.1808,-114.7836C165.2564,-113.9729 176.1432,-111.3117 176.1432,-106.8 176.1432,-103.381 169.8912,-101.0246 160.302,-99.731"/>
+<polygon fill="#000000" stroke="#000000" points="160.4553,-96.2307 150.1808,-98.8164 159.8252,-103.2023 160.4553,-96.2307"/>
+<text text-anchor="middle" x="184.5005" y="-102.6" font-family="Times,serif" font-size="14.00" fill="#000000">a,b</text>
+</g>
+<!-- ({q0},{q1})&#45;&gt;({q0}) -->
+<g id="edge9" class="edge">
+<title>({q0},{q1})&#45;&gt;({q0})</title>
+<path fill="none" stroke="#000000" d="M79.0716,-213.6168C79.0716,-226.3398 79.0716,-243.5981 79.0716,-257.888"/>
+<polygon fill="#000000" stroke="#000000" points="75.5717,-258.1127 79.0716,-268.1127 82.5717,-258.1127 75.5717,-258.1127"/>
+<text text-anchor="middle" x="82.1789" y="-235.8" font-family="Times,serif" font-size="14.00" fill="#000000">c</text>
+</g>
+<!-- ({q0},{q1})&#45;&gt;({q0},{q1},{q2}) -->
+<g id="edge7" class="edge">
+<title>({q0},{q1})&#45;&gt;({q0},{q1},{q2})</title>
+<path fill="none" stroke="#000000" d="M79.0716,-177.2006C79.0716,-165.0949 79.0716,-149.0076 79.0716,-135.2674"/>
+<polygon fill="#000000" stroke="#000000" points="82.5717,-134.872 79.0716,-124.872 75.5717,-134.8721 82.5717,-134.872"/>
+<text text-anchor="middle" x="82.1789" y="-147" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- ({q0},{q1})&#45;&gt;({q0},{q1}) -->
+<g id="edge8" class="edge">
+<title>({q0},{q1})&#45;&gt;({q0},{q1})</title>
+<path fill="none" stroke="#000000" d="M130.7503,-203.7775C144.437,-203.3102 154.8033,-200.5844 154.8033,-195.6 154.8033,-191.9396 149.2127,-189.4972 140.822,-188.2729"/>
+<polygon fill="#000000" stroke="#000000" points="141.0094,-184.7764 130.7503,-187.4225 140.4204,-191.7516 141.0094,-184.7764"/>
+<text text-anchor="middle" x="158.3033" y="-191.4" font-family="Times,serif" font-size="14.00" fill="#000000">b</text>
+</g>
+</g>
+</svg>

@@ -270,6 +270,20 @@ public class BuchiAutomata implements IAutomata {
     }
 
     /**
+     * Run the automata on a given string starting from a list of initial states
+     * and return the list of reachable states
+     *
+     * @param word          The word to read
+     * @param initialStates The list of initial states
+     * @return The list of states that can be reached
+     */
+    @Override
+    public List<IState> run(String word, Collection<IState> initialStates) {
+        // TODO implement run
+        return null;
+    }
+
+    /**
      * Read a symbol (char) starting from the initial state
      * and return the list of reachable states
      *
@@ -304,6 +318,23 @@ public class BuchiAutomata implements IAutomata {
             }
         }
         return new LinkedList<>(reachable);
+    }
+
+    /**
+     * Read a symbol (char) starting from a list of given states
+     * and return the list of reachable states
+     *
+     * @param symbol        The char to read
+     * @param initialStates The list of initial states
+     * @return The list of states that can be reached
+     */
+    @Override
+    public List<IState> run(char symbol, Collection<IState> initialStates) {
+        List<IState> reachable = new LinkedList<>();
+        for (IState source : initialStates) {
+            reachable.addAll(run(symbol, source));
+        }
+        return reachable;
     }
 
     /**

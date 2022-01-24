@@ -124,7 +124,6 @@ public class BuchiAlgorithms {
 
 
     public static IAutomata intersection(IAutomata first, IAutomata second) {
-        // TODO correct intersection
         IAutomata newAutomata = new BuchiAutomata();
 
         // Keep track of the nodes to complete
@@ -239,6 +238,102 @@ public class BuchiAlgorithms {
     public static IAutomata removeDeadEnds(IAutomata automata) {
         // TODO implement remove dead ends
         return automata;
+    }
+
+    public static IAutomata greedySubsetConstruction(IAutomata automata) {
+        // TODO implement greedy subset construction
+
+        IAutomata newAutomata = new BuchiAutomata();
+
+        // Keep track of the nodes to complete
+        Set<String> toCheck = new HashSet<>();
+        Set<String> alreadyChecked = new HashSet<>();
+
+        // Keep track of the lists of states represented by the new states
+        // Each state represents multiple lists (in the algorighm: {}), each containing potentially multiple states
+        Map<String, List<List<IState>>> nameToLists = new HashMap<>();
+
+        // Initial state of the new automata
+        IState newq0 = new State("({" + automata.getInitialState().getKey() + "})", automata.getInitialState().isFinal());
+        newAutomata.addState(newq0);
+
+        // Add the initial state to the list of states to check
+        toCheck.add(newq0.getKey());
+        List<List<IState>> listNewQ0 = new LinkedList<>();
+        listNewQ0.add(automata.getInitialState().toList());
+        nameToLists.put(newq0.getKey(), listNewQ0);
+
+        // Construct every new state
+        while (!toCheck.isEmpty()) {
+            // Get next state to construct
+            String stateToCheckName = toCheck.iterator().next();
+            IState stateToCheck = newAutomata.getStateByKey(stateToCheckName);
+            assert stateToCheck != null;
+
+            // States ({}) represented in the state
+            List<List<IState>> currentStates = nameToLists.get(stateToCheckName);
+            // Reverse list --> start from right-most element
+            Collections.reverse(currentStates);
+
+            // Do for each symbol
+            for (char symbol : automata.getAlphabet()) {
+                // Get successors
+                List<List<IState>> successors = new LinkedList<>();
+                Set<IState> alreadyAdded = new HashSet<>(); // Keep track of states already considered ("remove" part in the algorithm)
+
+                for (List<IState> ls : currentStates) {
+                    // Get successors of each element
+                    List<IState> reachable = automata.run(symbol, ls);
+                    // Split into final and non-final (with finals on the right)
+                    List<IState> reachable_final = reachable.stream().filter(IState::isFinal).collect(Collectors.toList());
+                    List<IState> reachable_normal = reachable.stream().filter(s -> !s.isFinal()).collect(Collectors.toList());
+                    // Remove states already reached for elements more on the right and add to list
+                    reachable_final.removeAll(alreadyAdded);  // remove duplicates
+                    alreadyAdded.addAll(reachable_final);     // keep track for future duplicates
+                    successors.add(reachable_final);          // add to list as successors
+                    reachable_normal.removeAll(alreadyAdded); // remove duplicates
+                    alreadyAdded.addAll(reachable_normal);    // keep track for future duplicates
+                    successors.add(reachable_normal);         // add to list as successors
+                }
+
+                // Remove empty sets
+                successors.removeIf(List::isEmpty);
+
+                Collections.reverse(successors);
+
+                // If necessary, create new state and add to lists (toCheck, nameToLists)
+                StringBuilder temp = new StringBuilder();
+                for (List<IState> list : successors) {
+                    temp.append("{");
+                    temp.append(list.stream().map(IState::getKey).sorted().collect(Collectors.joining(",")));
+                    temp.append("},");
+                }
+                temp.deleteCharAt(temp.length() - 1);  // Delete last ','
+                String newStateName = "(" + temp + ")";
+                IState newState = newAutomata.getStateByKey(newStateName);
+                if (newState == null) {
+                    // Create new state
+                    newState = new State(newStateName);
+
+                    // Add to automata
+                    newAutomata.addState(newState);
+
+                    // Add to list to check
+                    toCheck.add(newStateName);
+
+                    // Update dictionary
+                    nameToLists.put(newStateName, successors);
+                }
+                // Add transition
+                newAutomata.addTransition(stateToCheck, symbol, newState);
+            }
+
+            // Remove state from list to check
+            toCheck.remove(stateToCheckName);
+            alreadyChecked.add(stateToCheckName);
+        }
+
+        return newAutomata;
     }
 
 
