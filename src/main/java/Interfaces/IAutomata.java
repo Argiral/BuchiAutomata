@@ -208,4 +208,10 @@ public interface IAutomata {
      * @return a string describing the automata
      */
     String getStatistics();
+
+    /**
+     * Clone the automata and return an exact copy
+     * @return A clone of the automata
+     */
+    IAutomata clone();
 }

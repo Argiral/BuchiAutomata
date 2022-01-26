@@ -1,3 +1,4 @@
+import Interfaces.IAutomata;
 import Interfaces.ITransition;
 import Model.BuchiAutomata;
 import Model.State;
@@ -128,6 +129,14 @@ class BuchiAutomataTest {
         assertTrue(automataNBA.isDeterministic());
     }
 
+    @Test
+    void testClone() {
+        IAutomata cloneDBA = automataDBA.clone();
+        assertNotSame(automataDBA, cloneDBA);
+        assertEquals(automataDBA.numberOfStates(), cloneDBA.numberOfStates());
+        assertEquals(automataDBA.numberOfTransitions(), cloneDBA.numberOfTransitions());
+    }
+
 
     void createTestNBA() {
         // Create non-deterministic automata
@@ -162,6 +171,7 @@ class BuchiAutomataTest {
         automataNBA.addTransition(new Transition(s4, 'b', s4));
     }
 
+
     void createTestDBA() {
         // Create deterministic automata
         automataDBA = new BuchiAutomata();
@@ -191,4 +201,6 @@ class BuchiAutomataTest {
 
         transitionToAddLater = new Transition(s1, 'b', s2);
     }
+
+
 }

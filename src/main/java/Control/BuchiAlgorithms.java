@@ -521,11 +521,6 @@ public class BuchiAlgorithms {
         return newAutomata;
     }
 
-    public static IAutomata removeDeadEnds(IAutomata automata) {
-        // TODO implement remove dead ends
-        return automata;
-    }
-
     public static IAutomata greedySubsetConstruction(IAutomata automata) {
         IAutomata newAutomata = new BuchiAutomata();
 
@@ -631,6 +626,61 @@ public class BuchiAlgorithms {
         return newAutomata;
     }
 
+    public static IAutomata simplifyAutomata(IAutomata automata) {
+        return removeDeadEnds(removeUnreachableStates(automata));
+    }
+
+    public static IAutomata removeDeadEnds(IAutomata automata) {
+        // TODO implement remove dead ends
+        System.err.println("Remove dead ends not yet implemented!");
+        return automata;
+    }
+
+    public static IAutomata removeUnreachableStates(IAutomata automata) {
+        IAutomata newAutomata = automata.clone();
+
+        Set<IState> alreadyReached = new HashSet<>();
+        // Initialize states to check
+        Set<IState> newStates = new HashSet<>(newAutomata.getInitialState().toList());
+
+        // While we still reach new states
+        while (newStates.size() > 0) {
+            for (char symbol : automata.getAlphabet()) {
+                newStates.addAll(automata.run(symbol, newStates));
+            }
+
+            // Remove the state already reached in the previous iterations
+            newStates.removeAll(alreadyReached);
+
+            // Add the newly reached states to the list of visited states
+            alreadyReached.addAll(newStates);
+        }
+
+        // Remove states not visited
+        for (IState s : newAutomata.getStates()) {
+            if (!alreadyReached.contains(s)) {
+                newAutomata.removeState(s);
+                System.out.println(s.getKey() + " removed");
+            }
+        }
+
+        return newAutomata;
+    }
+
+    public static IAutomata invertTransitions(IAutomata automata) {
+        IAutomata newAutomata = new BuchiAutomata();
+
+        for (IState s : automata.getStates()) {
+            newAutomata.addState(s);
+        }
+
+        for (ITransition t : automata.getTransitionsList()) {
+            newAutomata.addTransition(t.getDestination(), t.getSymbol(), t.getSource());
+        }
+
+        return newAutomata;
+    }
+
 
     // Helper method for reduceDegOfNonDeterminism()
     private static void create_new_state(IAutomata newAutomata, Set<String> toCheck, Set<String> alreadyChecked, Map<String, List<IState>> nameToList, IState newSource, char symbol, Set<IState> reachable_states, String new_state_key, IState new_state) {
@@ -727,15 +777,15 @@ public class BuchiAlgorithms {
         return matchList;
     }
 
-    public static List<String> extractNodesColor(String nodeName) {
-        Pattern regex = Pattern.compile(".*color=\"(green|red|blue)\".*");
-        Matcher regexMatcher = regex.matcher(nodeName);
-
-        List<String> matchList = new LinkedList<>();
-        while (regexMatcher.find()) {//Finds Matching Pattern in String
-            matchList.add(regexMatcher.group(1));
-        }
-
-        return matchList;
-    }
+//    public static List<String> extractNodesColor(String nodeName) {
+//        Pattern regex = Pattern.compile(".*color=\"(green|red|blue)\".*");
+//        Matcher regexMatcher = regex.matcher(nodeName);
+//
+//        List<String> matchList = new LinkedList<>();
+//        while (regexMatcher.find()) {//Finds Matching Pattern in String
+//            matchList.add(regexMatcher.group(1));
+//        }
+//
+//        return matchList;
+//    }
 }

@@ -461,4 +461,31 @@ public class BuchiAutomata implements IAutomata {
                 "\tdeterministic: " + this.isDeterministic() + " (deg: " + this.degreeOfNonDeterminism() + ")\n" +
                 "\tcomplete: " + this.isComplete() + "\n";
     }
+
+    /**
+     * Clone the automata and return an exact copy
+     *
+     * @return A clone of the automata
+     */
+    @Override
+    public IAutomata clone() {
+        IAutomata automata = new BuchiAutomata();
+
+        // Copy initial state
+        automata.addState(new State(this.initialState.getKey(), this.initialState.isFinal()));
+
+        // Copy states
+        for (IState s : this.states) {
+            if (s != this.initialState) {
+                automata.addState(new State(s.getKey(), s.isFinal()));
+            }
+        }
+
+        // Copy transitions
+        for (ITransition t : this.getTransitionsList()) {
+            automata.addTransition(new Transition(automata.getStateByKey(t.getSource().getKey()), t.getSymbol(), automata.getStateByKey(t.getDestination().getKey())));
+        }
+
+        return automata;
+    }
 }

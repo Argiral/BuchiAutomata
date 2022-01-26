@@ -1,0 +1,41 @@
+<svg width="115pt" height="222pt"
+ viewBox="0.00 0.00 115.43 221.60" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 217.6)">
+<title>%0</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-217.6 111.4327,-217.6 111.4327,4 -4,4"/>
+<!-- &lt;b&gt;{q0}&lt;/b&gt; -->
+<g id="node1" class="node">
+<title>&lt;b&gt;{q0}&lt;/b&gt;</title>
+<polygon fill="none" stroke="#000000" points="86.7292,-191.5946 80.1906,-206.8228 53.7163,-213.6 27.2421,-206.8228 20.7035,-191.5946 39.0243,-179.3826 68.4084,-179.3826 86.7292,-191.5946"/>
+<text text-anchor="start" x="39.9977" y="-192.4" font-family="Times,serif" font-weight="bold" font-size="14.00" fill="#000000">{q0}</text>
+</g>
+<!-- {q1} -->
+<g id="node2" class="node">
+<title>{q1}</title>
+<ellipse fill="none" stroke="#000000" cx="53.7163" cy="-106.8" rx="29.9244" ry="18"/>
+<text text-anchor="start" x="39.9977" y="-102.6" font-family="Times,serif" font-size="14.00" fill="#000000">{q1}</text>
+</g>
+<!-- &lt;b&gt;{q0}&lt;/b&gt;&#45;&gt;{q1} -->
+<g id="edge1" class="edge">
+<title>&lt;b&gt;{q0}&lt;/b&gt;&#45;&gt;{q1}</title>
+<path fill="none" stroke="#000000" d="M53.7163,-179.3127C53.7163,-166.9032 53.7163,-149.5164 53.7163,-134.8788"/>
+<polygon fill="#000000" stroke="#000000" points="57.2164,-134.8168 53.7163,-124.8168 50.2164,-134.8168 57.2164,-134.8168"/>
+<text text-anchor="middle" x="56.8236" y="-147" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- &lt;font color=&quot;red&quot;&gt;{q0}&lt;/font&gt;, &lt;font color=&quot;green&quot;&gt;{q1}&lt;/font&gt; -->
+<g id="node3" class="node">
+<title>&lt;font color=&quot;red&quot;&gt;{q0}&lt;/font&gt;, &lt;font color=&quot;green&quot;&gt;{q1}&lt;/font&gt;</title>
+<ellipse fill="none" stroke="#000000" stroke-width="3" cx="53.7163" cy="-18" rx="53.9336" ry="18"/>
+<text text-anchor="start" x="22.7791" y="-14.8" font-family="Times,serif" font-size="14.00" fill="#ff0000">{q0}</text>
+<text text-anchor="start" x="50.2163" y="-14.8" font-family="Times,serif" font-size="14.00" fill="#000000">, </text>
+<text text-anchor="start" x="57.2163" y="-14.8" font-family="Times,serif" font-size="14.00" fill="#00ff00">{q1}</text>
+</g>
+<!-- {q1}&#45;&gt;&lt;font color=&quot;red&quot;&gt;{q0}&lt;/font&gt;, &lt;font color=&quot;green&quot;&gt;{q1}&lt;/font&gt; -->
+<g id="edge2" class="edge">
+<title>{q1}&#45;&gt;&lt;font color=&quot;red&quot;&gt;{q0}&lt;/font&gt;, &lt;font color=&quot;green&quot;&gt;{q1}&lt;/font&gt;</title>
+<path fill="none" stroke="#000000" d="M53.7163,-88.4006C53.7163,-76.2949 53.7163,-60.2076 53.7163,-46.4674"/>
+<polygon fill="#000000" stroke="#000000" points="57.2164,-46.072 53.7163,-36.072 50.2164,-46.0721 57.2164,-46.072"/>
+<text text-anchor="middle" x="56.8236" y="-58.2" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+</g>
+</svg>

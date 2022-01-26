@@ -1,0 +1,343 @@
+<svg width="658pt" height="399pt"
+ viewBox="0.00 0.00 658.11 399.20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 395.2)">
+<title>%0</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-395.2 654.1064,-395.2 654.1064,4 -4,4"/>
+<!-- ({q0},{q2}) -->
+<g id="node1" class="node">
+<title>({q0},{q2})</title>
+<ellipse fill="none" stroke="#000000" cx="107" cy="-373.2" rx="57.9643" ry="18"/>
+<text text-anchor="start" x="73.1522" y="-369" font-family="Times,serif" font-size="14.00" fill="#000000">({q0},{q2})</text>
+</g>
+<!-- ({q0},{q2})&#45;&gt;({q0},{q2}) -->
+<g id="edge1" class="edge">
+<title>({q0},{q2})&#45;&gt;({q0},{q2})</title>
+<path fill="none" stroke="#000000" d="M158.6787,-381.3775C172.3654,-380.9102 182.7317,-378.1844 182.7317,-373.2 182.7317,-369.5396 177.1411,-367.0972 168.7504,-365.8729"/>
+<polygon fill="#000000" stroke="#000000" points="168.9378,-362.3764 158.6787,-365.0225 168.3487,-369.3516 168.9378,-362.3764"/>
+<text text-anchor="middle" x="191.089" y="-369" font-family="Times,serif" font-size="14.00" fill="#000000">b,c</text>
+</g>
+<!-- ({q0},{q1},{q2}) -->
+<g id="node2" class="node">
+<title>({q0},{q1},{q2})</title>
+<ellipse fill="none" stroke="#000000" cx="107" cy="-284.4" rx="79.1433" ry="18"/>
+<text text-anchor="start" x="57.6836" y="-280.2" font-family="Times,serif" font-size="14.00" fill="#000000">({q0},{q1},{q2})</text>
+</g>
+<!-- ({q0},{q2})&#45;&gt;({q0},{q1},{q2}) -->
+<g id="edge2" class="edge">
+<title>({q0},{q2})&#45;&gt;({q0},{q1},{q2})</title>
+<path fill="none" stroke="#000000" d="M100.2049,-355.1371C98.3945,-349.478 96.6913,-343.154 95.7854,-337.2 94.6623,-329.8183 94.6623,-327.7817 95.7854,-320.4 96.1959,-317.7021 96.7701,-314.9282 97.4438,-312.1747"/>
+<polygon fill="#000000" stroke="#000000" points="100.8367,-313.0389 100.2049,-302.4629 94.1035,-311.1246 100.8367,-313.0389"/>
+<text text-anchor="middle" x="99.1073" y="-324.6" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="node3" class="node">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)</title>
+<ellipse fill="none" stroke="#000000" stroke-width="3" cx="91" cy="-18" rx="57.9643" ry="18"/>
+<text text-anchor="start" x="57.1522" y="-14.8" font-family="Times,serif" font-size="14.00" fill="#000000">(</text>
+<text text-anchor="start" x="61.8128" y="-14.8" font-family="Times,serif" font-size="14.00" fill="#00ff00">{q0}</text>
+<text text-anchor="start" x="89.25" y="-14.8" font-family="Times,serif" font-size="14.00" fill="#000000">,</text>
+<text text-anchor="start" x="92.75" y="-14.8" font-family="Times,serif" font-size="14.00" fill="#00ff00">{q2}</text>
+<text text-anchor="start" x="120.1872" y="-14.8" font-family="Times,serif" font-size="14.00" fill="#000000">)</text>
+</g>
+<!-- ({q0},{q2})&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="edge3" class="edge">
+<title>({q0},{q2})&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M68.9745,-359.5794C38.2197,-345.8396 0,-321.3347 0,-284.4 0,-284.4 0,-284.4 0,-106.8 0,-76.6222 25.9518,-53.3515 50.1375,-38.217"/>
+<polygon fill="#000000" stroke="#000000" points="52.1002,-41.1223 58.9168,-33.0115 48.5301,-35.1011 52.1002,-41.1223"/>
+<text text-anchor="middle" x="8.3573" y="-191.4" font-family="Times,serif" font-size="14.00" fill="#000000">b,c</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="node4" class="node">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)</title>
+<ellipse fill="none" stroke="#000000" cx="207" cy="-195.6" rx="79.1433" ry="18"/>
+<text text-anchor="start" x="157.6836" y="-192.4" font-family="Times,serif" font-size="14.00" fill="#000000">(</text>
+<text text-anchor="start" x="162.3442" y="-192.4" font-family="Times,serif" font-size="14.00" fill="#00ff00">{q0}</text>
+<text text-anchor="start" x="189.7814" y="-192.4" font-family="Times,serif" font-size="14.00" fill="#000000">,</text>
+<text text-anchor="start" x="193.2814" y="-192.4" font-family="Times,serif" font-size="14.00" fill="#ff0000">{q1}</text>
+<text text-anchor="start" x="220.7186" y="-192.4" font-family="Times,serif" font-size="14.00" fill="#000000">,</text>
+<text text-anchor="start" x="224.2186" y="-192.4" font-family="Times,serif" font-size="14.00" fill="#00ff00">{q2}</text>
+<text text-anchor="start" x="251.6558" y="-192.4" font-family="Times,serif" font-size="14.00" fill="#000000">)</text>
+</g>
+<!-- ({q0},{q2})&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="edge4" class="edge">
+<title>({q0},{q2})&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M159.7452,-365.8283C193.0915,-359.9648 231.7663,-350.5203 242,-337.2 267.9771,-303.3879 244.6411,-252.7968 225.6234,-222.1263"/>
+<polygon fill="#000000" stroke="#000000" points="228.5278,-220.1719 220.1694,-213.6612 222.6434,-223.9632 228.5278,-220.1719"/>
+<text text-anchor="middle" x="256.1073" y="-280.2" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- ({q0},{q1},{q2})&#45;&gt;({q0},{q2}) -->
+<g id="edge6" class="edge">
+<title>({q0},{q1},{q2})&#45;&gt;({q0},{q2})</title>
+<path fill="none" stroke="#000000" d="M107,-302.472C107,-314.6243 107,-330.8958 107,-344.768"/>
+<polygon fill="#000000" stroke="#000000" points="103.5001,-344.8005 107,-354.8006 110.5001,-344.8006 103.5001,-344.8005"/>
+<text text-anchor="middle" x="110.1073" y="-324.6" font-family="Times,serif" font-size="14.00" fill="#000000">c</text>
+</g>
+<!-- ({q0},{q1},{q2})&#45;&gt;({q0},{q1},{q2}) -->
+<g id="edge5" class="edge">
+<title>({q0},{q1},{q2})&#45;&gt;({q0},{q1},{q2})</title>
+<path fill="none" stroke="#000000" d="M178.1092,-292.3836C193.1848,-291.5729 204.0716,-288.9117 204.0716,-284.4 204.0716,-280.981 197.8196,-278.6246 188.2303,-277.331"/>
+<polygon fill="#000000" stroke="#000000" points="188.3836,-273.8307 178.1092,-276.4164 187.7536,-280.8023 188.3836,-273.8307"/>
+<text text-anchor="middle" x="212.4289" y="-280.2" font-family="Times,serif" font-size="14.00" fill="#000000">a,b</text>
+</g>
+<!-- ({q0},{q1},{q2})&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="edge8" class="edge">
+<title>({q0},{q1},{q2})&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M104.9405,-266.1463C100.8972,-229.287 92.0496,-143.3047 89,-70.8 88.6661,-62.8607 88.7871,-54.2488 89.0935,-46.3285"/>
+<polygon fill="#000000" stroke="#000000" points="92.6018,-46.2458 89.6008,-36.0849 85.6104,-45.8995 92.6018,-46.2458"/>
+<text text-anchor="middle" x="98.1073" y="-147" font-family="Times,serif" font-size="14.00" fill="#000000">c</text>
+</g>
+<!-- ({q0},{q1},{q2})&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="edge7" class="edge">
+<title>({q0},{q1},{q2})&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M126.7568,-266.856C141.8228,-253.4773 162.757,-234.8878 179.4655,-220.0506"/>
+<polygon fill="#000000" stroke="#000000" points="182.1308,-222.3646 187.2843,-213.1076 177.4829,-217.1304 182.1308,-222.3646"/>
+<text text-anchor="middle" x="173.3573" y="-235.8" font-family="Times,serif" font-size="14.00" fill="#000000">a,b</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="edge10" class="edge">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M142.6787,-26.1775C156.3654,-25.7102 166.7317,-22.9844 166.7317,-18 166.7317,-14.3396 161.1411,-11.8972 152.7504,-10.6729"/>
+<polygon fill="#000000" stroke="#000000" points="152.9378,-7.1764 142.6787,-9.8225 152.3487,-14.1516 152.9378,-7.1764"/>
+<text text-anchor="middle" x="175.089" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">b,c</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="edge9" class="edge">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M98.8446,-36.1645C110.3038,-62.3898 131.3844,-109.4031 141.7854,-124.8 152.9679,-141.3536 167.9265,-157.8852 180.6966,-170.8059"/>
+<polygon fill="#000000" stroke="#000000" points="178.3531,-173.4111 187.9174,-177.9691 183.283,-168.4416 178.3531,-173.4111"/>
+<text text-anchor="middle" x="144.1073" y="-102.6" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="edge13" class="edge">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M172.898,-179.1968C151.8843,-167.1915 126.4302,-148.816 112.7854,-124.8 99.0481,-100.6213 93.9036,-69.0091 92.0133,-46.4648"/>
+<polygon fill="#000000" stroke="#000000" points="95.4861,-45.9412 91.3234,-36.1984 88.5019,-46.4106 95.4861,-45.9412"/>
+<text text-anchor="middle" x="116.1073" y="-102.6" font-family="Times,serif" font-size="14.00" fill="#000000">c</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="edge12" class="edge">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M278.1092,-203.5836C293.1848,-202.7729 304.0716,-200.1117 304.0716,-195.6 304.0716,-192.181 297.8196,-189.8246 288.2303,-188.531"/>
+<polygon fill="#000000" stroke="#000000" points="288.3836,-185.0307 278.1092,-187.6164 287.7536,-192.0023 288.3836,-185.0307"/>
+<text text-anchor="middle" x="307.5716" y="-191.4" font-family="Times,serif" font-size="14.00" fill="#000000">b</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="node8" class="node">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)</title>
+<ellipse fill="none" stroke="#000000" cx="236" cy="-106.8" rx="79.1433" ry="18"/>
+<text text-anchor="start" x="186.6836" y="-103.6" font-family="Times,serif" font-size="14.00" fill="#000000">(</text>
+<text text-anchor="start" x="191.3442" y="-103.6" font-family="Times,serif" font-size="14.00" fill="#00ff00">{q0}</text>
+<text text-anchor="start" x="218.7814" y="-103.6" font-family="Times,serif" font-size="14.00" fill="#000000">,</text>
+<text text-anchor="start" x="222.2814" y="-103.6" font-family="Times,serif" font-size="14.00" fill="#0000ff">{q1}</text>
+<text text-anchor="start" x="249.7186" y="-103.6" font-family="Times,serif" font-size="14.00" fill="#000000">,</text>
+<text text-anchor="start" x="253.2186" y="-103.6" font-family="Times,serif" font-size="14.00" fill="#00ff00">{q2}</text>
+<text text-anchor="start" x="280.6558" y="-103.6" font-family="Times,serif" font-size="14.00" fill="#000000">)</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="edge11" class="edge">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M205.9398,-177.5137C205.9019,-167.085 206.8482,-153.885 210.7854,-142.8 211.9091,-139.6362 213.3914,-136.4965 215.0759,-133.466"/>
+<polygon fill="#000000" stroke="#000000" points="218.1795,-135.1072 220.5791,-124.7876 212.2679,-131.3584 218.1795,-135.1072"/>
+<text text-anchor="middle" x="213.1073" y="-147" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;) -->
+<g id="node5" class="node">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;)</title>
+<ellipse fill="none" stroke="#000000" cx="415" cy="-195.6" rx="57.9643" ry="18"/>
+<text text-anchor="start" x="381.1522" y="-192.4" font-family="Times,serif" font-size="14.00" fill="#000000">(</text>
+<text text-anchor="start" x="385.8128" y="-192.4" font-family="Times,serif" font-size="14.00" fill="#00ff00">{q0}</text>
+<text text-anchor="start" x="413.25" y="-192.4" font-family="Times,serif" font-size="14.00" fill="#000000">,</text>
+<text text-anchor="start" x="416.75" y="-192.4" font-family="Times,serif" font-size="14.00" fill="#ff0000">{q1}</text>
+<text text-anchor="start" x="444.1872" y="-192.4" font-family="Times,serif" font-size="14.00" fill="#000000">)</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;) -->
+<g id="edge15" class="edge">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M466.6787,-203.7775C480.3654,-203.3102 490.7317,-200.5844 490.7317,-195.6 490.7317,-191.9396 485.1411,-189.4972 476.7504,-188.2729"/>
+<polygon fill="#000000" stroke="#000000" points="476.9378,-184.7764 466.6787,-187.4225 476.3487,-191.7516 476.9378,-184.7764"/>
+<text text-anchor="middle" x="494.2317" y="-191.4" font-family="Times,serif" font-size="14.00" fill="#000000">b</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="node6" class="node">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;)</title>
+<ellipse fill="none" stroke="#000000" cx="412" cy="-106.8" rx="79.1433" ry="18"/>
+<text text-anchor="start" x="362.6836" y="-103.6" font-family="Times,serif" font-size="14.00" fill="#000000">(</text>
+<text text-anchor="start" x="367.3442" y="-103.6" font-family="Times,serif" font-size="14.00" fill="#00ff00">{q0}</text>
+<text text-anchor="start" x="394.7814" y="-103.6" font-family="Times,serif" font-size="14.00" fill="#000000">,</text>
+<text text-anchor="start" x="398.2814" y="-103.6" font-family="Times,serif" font-size="14.00" fill="#0000ff">{q1}</text>
+<text text-anchor="start" x="425.7186" y="-103.6" font-family="Times,serif" font-size="14.00" fill="#000000">,</text>
+<text text-anchor="start" x="429.2186" y="-103.6" font-family="Times,serif" font-size="14.00" fill="#ff0000">{q2}</text>
+<text text-anchor="start" x="456.6558" y="-103.6" font-family="Times,serif" font-size="14.00" fill="#000000">)</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="edge14" class="edge">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M414.3784,-177.2006C413.9694,-165.0949 413.4259,-149.0076 412.9617,-135.2674"/>
+<polygon fill="#000000" stroke="#000000" points="416.4463,-134.7481 412.6105,-124.872 409.4503,-134.9845 416.4463,-134.7481"/>
+<text text-anchor="middle" x="416.1073" y="-147" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;) -->
+<g id="node7" class="node">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;)</title>
+<ellipse fill="none" stroke="#000000" stroke-width="3" cx="579" cy="-106.8" rx="36.2839" ry="18"/>
+<text text-anchor="start" x="560.6208" y="-103.6" font-family="Times,serif" font-size="14.00" fill="#000000">(</text>
+<text text-anchor="start" x="565.2814" y="-103.6" font-family="Times,serif" font-size="14.00" fill="#00ff00">{q0}</text>
+<text text-anchor="start" x="592.7186" y="-103.6" font-family="Times,serif" font-size="14.00" fill="#000000">)</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;) -->
+<g id="edge16" class="edge">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M430.4311,-178.19C441.4817,-166.6801 457.2741,-152.0605 473.7854,-142.8 498.1475,-129.1363 507.6251,-133.9962 534,-124.8 536.5201,-123.9213 539.1066,-122.984 541.7042,-122.0162"/>
+<polygon fill="#000000" stroke="#000000" points="542.978,-125.2763 551.0616,-118.4275 540.4713,-118.7405 542.978,-125.2763"/>
+<text text-anchor="middle" x="476.1073" y="-147" font-family="Times,serif" font-size="14.00" fill="#000000">c</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="edge17" class="edge">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M483.1092,-114.7836C498.1848,-113.9729 509.0716,-111.3117 509.0716,-106.8 509.0716,-103.381 502.8196,-101.0246 493.2303,-99.731"/>
+<polygon fill="#000000" stroke="#000000" points="493.3836,-96.2307 483.1092,-98.8164 492.7536,-103.2023 493.3836,-96.2307"/>
+<text text-anchor="middle" x="517.4289" y="-102.6" font-family="Times,serif" font-size="14.00" fill="#000000">a,b</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="node11" class="node">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;)</title>
+<ellipse fill="none" stroke="#000000" cx="411" cy="-18" rx="57.9643" ry="18"/>
+<text text-anchor="start" x="377.1522" y="-14.8" font-family="Times,serif" font-size="14.00" fill="#000000">(</text>
+<text text-anchor="start" x="381.8128" y="-14.8" font-family="Times,serif" font-size="14.00" fill="#00ff00">{q0}</text>
+<text text-anchor="start" x="409.25" y="-14.8" font-family="Times,serif" font-size="14.00" fill="#000000">,</text>
+<text text-anchor="start" x="412.75" y="-14.8" font-family="Times,serif" font-size="14.00" fill="#ff0000">{q2}</text>
+<text text-anchor="start" x="440.1872" y="-14.8" font-family="Times,serif" font-size="14.00" fill="#000000">)</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="edge18" class="edge">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M405.2049,-88.7371C403.3945,-83.078 401.6913,-76.754 400.7854,-70.8 399.555,-62.7133 400.363,-53.9777 401.9584,-45.9845"/>
+<polygon fill="#000000" stroke="#000000" points="405.4192,-46.5673 404.404,-36.0213 398.621,-44.8986 405.4192,-46.5673"/>
+<text text-anchor="middle" x="403.1073" y="-58.2" font-family="Times,serif" font-size="14.00" fill="#000000">c</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;) -->
+<g id="edge19" class="edge">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M554.3609,-120.1412C527.4524,-134.7112 484.0323,-158.2215 452.8057,-175.1296"/>
+<polygon fill="#000000" stroke="#000000" points="451.0695,-172.0895 443.9424,-179.9288 454.4026,-178.245 451.0695,-172.0895"/>
+<text text-anchor="middle" x="514.1073" y="-147" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;) -->
+<g id="edge20" class="edge">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M611.3871,-115.0319C623.4567,-115.3018 633.3918,-112.5578 633.3918,-106.8 633.3918,-102.8415 628.6959,-100.3075 621.839,-99.1981"/>
+<polygon fill="#000000" stroke="#000000" points="621.5796,-95.6762 611.3871,-98.5681 621.1584,-102.6635 621.5796,-95.6762"/>
+<text text-anchor="middle" x="641.7491" y="-102.6" font-family="Times,serif" font-size="14.00" fill="#000000">b,c</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="edge22" class="edge">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M208.3853,-89.8884C185.0115,-75.5739 151.3759,-54.975 126.0961,-39.4933"/>
+<polygon fill="#000000" stroke="#000000" points="127.8891,-36.4872 117.5333,-34.2493 124.2332,-42.4567 127.8891,-36.4872"/>
+<text text-anchor="middle" x="179.1073" y="-58.2" font-family="Times,serif" font-size="14.00" fill="#000000">c</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="edge21" class="edge">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M230.0406,-125.0481C225.9978,-137.4275 220.5786,-154.0214 216.0116,-168.0059"/>
+<polygon fill="#000000" stroke="#000000" points="212.646,-167.0375 212.8686,-177.63 219.3001,-169.2106 212.646,-167.0375"/>
+<text text-anchor="middle" x="232.3573" y="-147" font-family="Times,serif" font-size="14.00" fill="#000000">a,b</text>
+</g>
+<!-- ({q0}) -->
+<g id="node9" class="node">
+<title>({q0})</title>
+<polygon fill="none" stroke="#000000" points="430.284,-280.3946 422.3052,-295.6228 390,-302.4 357.6948,-295.6228 349.716,-280.3946 372.072,-268.1826 407.928,-268.1826 430.284,-280.3946"/>
+<text text-anchor="start" x="371.6208" y="-280.2" font-family="Times,serif" font-size="14.00" fill="#000000">({q0})</text>
+</g>
+<!-- ({q0})&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;) -->
+<g id="edge25" class="edge">
+<title>({q0})&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M394.5854,-268.1127C398.113,-255.5827 403.0692,-237.9783 407.2147,-223.2533"/>
+<polygon fill="#000000" stroke="#000000" points="410.5867,-224.1911 409.9277,-213.6168 403.8486,-222.2941 410.5867,-224.1911"/>
+<text text-anchor="middle" x="407.1073" y="-235.8" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- ({q0})&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;) -->
+<g id="edge26" class="edge">
+<title>({q0})&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M416.3666,-272.5898C441.6326,-260.3741 479.8331,-239.4676 507,-213.6 531.7664,-190.0181 552.637,-156.4979 565.4282,-133.3288"/>
+<polygon fill="#000000" stroke="#000000" points="568.5799,-134.8581 570.2442,-124.3947 562.4182,-131.5365 568.5799,-134.8581"/>
+<text text-anchor="middle" x="545.3573" y="-191.4" font-family="Times,serif" font-size="14.00" fill="#000000">c,b</text>
+</g>
+<!-- ({q0})&#45;&gt;({q0}) -->
+<g id="edge24" class="edge">
+<title>({q0})&#45;&gt;({q0})</title>
+<path fill="none" stroke="#000000" d="M423.8953,-292.6092C437.2432,-293.0231 448.3918,-290.2867 448.3918,-284.4 448.3918,-279.9034 441.8868,-277.2449 432.8656,-276.4246"/>
+<polygon fill="#000000" stroke="#000000" points="432.7844,-272.9225 422.7207,-276.2351 432.6536,-279.9213 432.7844,-272.9225"/>
+<text text-anchor="middle" x="456.7491" y="-280.2" font-family="Times,serif" font-size="14.00" fill="#000000">c,b</text>
+</g>
+<!-- ({q0},{q1}) -->
+<g id="node10" class="node">
+<title>({q0},{q1})</title>
+<ellipse fill="none" stroke="#000000" cx="389" cy="-373.2" rx="57.9643" ry="18"/>
+<text text-anchor="start" x="355.1522" y="-369" font-family="Times,serif" font-size="14.00" fill="#000000">({q0},{q1})</text>
+</g>
+<!-- ({q0})&#45;&gt;({q0},{q1}) -->
+<g id="edge23" class="edge">
+<title>({q0})&#45;&gt;({q0},{q1})</title>
+<path fill="none" stroke="#000000" d="M389.7965,-302.472C389.6596,-314.6243 389.4764,-330.8958 389.3202,-344.768"/>
+<polygon fill="#000000" stroke="#000000" points="385.8201,-344.7618 389.2072,-354.8006 392.8197,-344.8407 385.8201,-344.7618"/>
+<text text-anchor="middle" x="392.1073" y="-324.6" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- ({q0},{q1})&#45;&gt;({q0},{q1},{q2}) -->
+<g id="edge27" class="edge">
+<title>({q0},{q1})&#45;&gt;({q0},{q1},{q2})</title>
+<path fill="none" stroke="#000000" d="M348.2959,-360.3826C299.6615,-345.0679 218.0195,-319.3593 163.344,-302.1424"/>
+<polygon fill="#000000" stroke="#000000" points="164.3897,-298.8023 153.8002,-299.1371 162.2872,-305.4791 164.3897,-298.8023"/>
+<text text-anchor="middle" x="276.1073" y="-324.6" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- ({q0},{q1})&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="edge30" class="edge">
+<title>({q0},{q1})&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;green&quot;&gt;{q2}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M372.6339,-355.7422C346.9431,-328.5475 295.2955,-274.7161 249,-231.6 244.8711,-227.7547 240.4253,-223.7783 236.0255,-219.9335"/>
+<polygon fill="#000000" stroke="#000000" points="238.092,-217.0939 228.234,-213.2119 233.5196,-222.3941 238.092,-217.0939"/>
+<text text-anchor="middle" x="323.1073" y="-280.2" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- ({q0},{q1})&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;) -->
+<g id="edge31" class="edge">
+<title>({q0},{q1})&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q1}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M418.5951,-357.4158C438.0186,-345.2462 461.8225,-326.4392 473,-302.4 486.5281,-273.3053 463.518,-241.0905 442.6052,-219.729"/>
+<polygon fill="#000000" stroke="#000000" points="444.9575,-217.134 435.3589,-212.6487 440.0654,-222.1408 444.9575,-217.134"/>
+<text text-anchor="middle" x="480.5" y="-280.2" font-family="Times,serif" font-size="14.00" fill="#000000">b</text>
+</g>
+<!-- ({q0},{q1})&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;) -->
+<g id="edge32" class="edge">
+<title>({q0},{q1})&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M428.6503,-359.833C442.0062,-354.1561 456.4398,-346.6347 468,-337.2 520.6459,-294.2339 530.8033,-275.8737 558,-213.6 569.049,-188.3006 574.3263,-157.0948 576.8211,-134.9634"/>
+<polygon fill="#000000" stroke="#000000" points="580.3155,-135.1939 577.8354,-124.8934 573.3507,-134.4923 580.3155,-135.1939"/>
+<text text-anchor="middle" x="552.1073" y="-235.8" font-family="Times,serif" font-size="14.00" fill="#000000">c</text>
+</g>
+<!-- ({q0},{q1})&#45;&gt;({q0}) -->
+<g id="edge29" class="edge">
+<title>({q0},{q1})&#45;&gt;({q0})</title>
+<path fill="none" stroke="#000000" d="M382.404,-355.1787C379.4626,-345.0027 377.0158,-332.0303 378.7854,-320.4 379.2528,-317.3279 379.9325,-314.1574 380.7296,-311.0305"/>
+<polygon fill="#000000" stroke="#000000" points="384.1087,-311.9451 383.5602,-301.3645 377.3908,-309.9778 384.1087,-311.9451"/>
+<text text-anchor="middle" x="381.1073" y="-324.6" font-family="Times,serif" font-size="14.00" fill="#000000">c</text>
+</g>
+<!-- ({q0},{q1})&#45;&gt;({q0},{q1}) -->
+<g id="edge28" class="edge">
+<title>({q0},{q1})&#45;&gt;({q0},{q1})</title>
+<path fill="none" stroke="#000000" d="M440.6787,-381.3775C454.3654,-380.9102 464.7317,-378.1844 464.7317,-373.2 464.7317,-369.5396 459.1411,-367.0972 450.7504,-365.8729"/>
+<polygon fill="#000000" stroke="#000000" points="450.9378,-362.3764 440.6787,-365.0225 450.3487,-369.3516 450.9378,-362.3764"/>
+<text text-anchor="middle" x="468.2317" y="-369" font-family="Times,serif" font-size="14.00" fill="#000000">b</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="edge33" class="edge">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;blue&quot;&gt;{q1}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M411.2035,-36.072C411.3404,-48.2243 411.5236,-64.4958 411.6798,-78.368"/>
+<polygon fill="#000000" stroke="#000000" points="408.1803,-78.4407 411.7928,-88.4006 415.1799,-78.3618 408.1803,-78.4407"/>
+<text text-anchor="middle" x="414.1073" y="-58.2" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- (&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;) -->
+<g id="edge34" class="edge">
+<title>(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;)&#45;&gt;(&lt;font color=&quot;green&quot;&gt;{q0}&lt;/font&gt;,&lt;font color=&quot;red&quot;&gt;{q2}&lt;/font&gt;)</title>
+<path fill="none" stroke="#000000" d="M462.6787,-26.1775C476.3654,-25.7102 486.7317,-22.9844 486.7317,-18 486.7317,-14.3396 481.1411,-11.8972 472.7504,-10.6729"/>
+<polygon fill="#000000" stroke="#000000" points="472.9378,-7.1764 462.6787,-9.8225 472.3487,-14.1516 472.9378,-7.1764"/>
+<text text-anchor="middle" x="495.089" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">b,c</text>
+</g>
+</g>
+</svg>

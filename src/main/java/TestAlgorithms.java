@@ -19,7 +19,10 @@ public class TestAlgorithms {
 //        testIntersection();
 //        testComplementDBA();
 //        testGreedySubsetConstruction();
-        testComplementBA();
+//        testComplementBA();
+        testRemoveUnreachableStates();
+//        testSimplifyAutomata();
+//        testInvertTransitions();
 
 //        System.out.println(BuchiAlgorithms.extractNodesColor("<font color=\"green\">{q1}</font>"));
 //        System.out.println(BuchiAlgorithms.extractNodesNames("{q0,q1}, {q1}, {q2} (Java), (.Net)"));
@@ -173,5 +176,40 @@ public class TestAlgorithms {
 
         AutomataViewer.saveAutomata(automata, "data/graph/test_color.svg", true);
         AutomataViewer.showAutomata(automata, true);
+    }
+
+    public static void testInvertTransitions() {
+        IAutomata automata = SeriesAutomata.s2e2();
+
+        IAutomata inverted = BuchiAlgorithms.invertTransitions(automata);
+
+        AutomataViewer.showAutomata(inverted);
+    }
+
+
+    private static void testRemoveUnreachableStates() {
+        IAutomata automata = SeriesAutomata.s2e2();
+
+        IState newState = new State("new");
+        automata.addState(newState);
+        automata.addTransition(newState, 'z', automata.getStateByKey("0"));
+        automata.addTransition(newState, 'z', automata.getStateByKey("1"));
+
+//        AutomataViewer.showAutomata(automata);
+
+        IAutomata smaller = BuchiAlgorithms.removeUnreachableStates(automata);
+
+        System.out.println(automata.getStatistics());
+        System.out.println(smaller.getStatistics());
+
+        AutomataViewer.showAutomata(smaller);
+    }
+
+    private static void testSimplifyAutomata() {
+        IAutomata automata = SeriesAutomata.s2e2();
+
+        AutomataViewer.showAutomata(automata);
+
+        BuchiAlgorithms.simplifyAutomata(automata);
     }
 }
