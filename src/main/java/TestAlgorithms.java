@@ -1,6 +1,9 @@
 import Control.BuchiAlgorithms;
 import Interfaces.IAutomata;
+import Interfaces.IState;
 import Model.AutomataFactory;
+import Model.BuchiAutomata;
+import Model.State;
 import View.AutomataViewer;
 
 import Model.SeriesAutomata;
@@ -12,8 +15,10 @@ public class TestAlgorithms {
 //        testReductionDegOfNonDet();
 //        testUnion();
 //        testIntersection();
-        testComplementDBA();
+//        testComplementDBA();
 //        testGreedySubsetConstruction();
+
+        testColoredLabels();
 
     }
 
@@ -22,8 +27,8 @@ public class TestAlgorithms {
         IAutomata degReduction = BuchiAlgorithms.reduceDegOfNonDeterminism(SeriesAutomata.s2e2());
 
         // Save images
-        AutomataViewer.printAutomata(SeriesAutomata.s2e2(), "data/graph/s2/2.svg");
-        AutomataViewer.printAutomata(degReduction, "data/graph/s2/degReduction.svg");
+        AutomataViewer.saveAutomata(SeriesAutomata.s2e2(), "data/graph/s2/2.svg");
+        AutomataViewer.saveAutomata(degReduction, "data/graph/s2/degReduction.svg");
 
         // Print statistics
         System.out.println("DEGREE OF NON-DETERMINISM REDUCTION");
@@ -36,9 +41,9 @@ public class TestAlgorithms {
         IAutomata union = BuchiAlgorithms.union(SeriesAutomata.s2ex4a1(), SeriesAutomata.s2ex4a2());
 
         // Save images
-        AutomataViewer.printAutomata(SeriesAutomata.s2ex4a1(), "data/graph/s2/4a.svg");
-        AutomataViewer.printAutomata(SeriesAutomata.s2ex4a2(), "data/graph/s2/4b.svg");
-        AutomataViewer.printAutomata(union, "data/graph/s2/4_union.svg");
+        AutomataViewer.saveAutomata(SeriesAutomata.s2ex4a1(), "data/graph/s2/4a.svg");
+        AutomataViewer.saveAutomata(SeriesAutomata.s2ex4a2(), "data/graph/s2/4b.svg");
+        AutomataViewer.saveAutomata(union, "data/graph/s2/4_union.svg");
     }
 
     private static void testIntersection() {
@@ -46,9 +51,9 @@ public class TestAlgorithms {
         IAutomata intersection = BuchiAlgorithms.intersection(SeriesAutomata.s2ex4a1(), SeriesAutomata.s2ex4a2());
 
         // Save images
-        AutomataViewer.printAutomata(SeriesAutomata.s2ex4a1(), "data/graph/s2/4a.svg");
-        AutomataViewer.printAutomata(SeriesAutomata.s2ex4a2(), "data/graph/s2/4b.svg");
-        AutomataViewer.printAutomata(intersection, "data/graph/s2/4_intersection.svg");
+        AutomataViewer.saveAutomata(SeriesAutomata.s2ex4a1(), "data/graph/s2/4a.svg");
+        AutomataViewer.saveAutomata(SeriesAutomata.s2ex4a2(), "data/graph/s2/4b.svg");
+        AutomataViewer.saveAutomata(intersection, "data/graph/s2/4_intersection.svg");
     }
 
     private static void testComplementDBA() {
@@ -58,11 +63,11 @@ public class TestAlgorithms {
         IAutomata a1c = BuchiAlgorithms.complementDBA(a1);
         IAutomata a2c = BuchiAlgorithms.complementDBA(a2);
 
-        AutomataViewer.printAutomata(a1, "data/graph/s3/1a.svg");
-        AutomataViewer.printAutomata(a2, "data/graph/s3/1b.svg");
-
-        AutomataViewer.printAutomata(a1c, "data/graph/s3/1a_complement.svg");
-        AutomataViewer.printAutomata(a2c, "data/graph/s3/1b_complement.svg");
+        AutomataViewer.saveAutomata(a1, "data/graph/s3/1a.svg");
+        AutomataViewer.saveAutomata(a2, "data/graph/s3/1b.svg");
+//
+        AutomataViewer.saveAutomata(a1c, "data/graph/s3/1a_complement.svg");
+        AutomataViewer.saveAutomata(a2c, "data/graph/s3/1b_complement.svg");
     }
 
     private static void testFactorySave() {
@@ -74,7 +79,7 @@ public class TestAlgorithms {
     private static void testFactoryLoad() {
         IAutomata automata = AutomataFactory.instance().loadFromXML("data/automata/s2e2.xml");
 
-        AutomataViewer.printAutomata(automata, "data/graph/s2/2_loaded.svg");
+        AutomataViewer.saveAutomata(automata, "data/graph/s2/2_loaded.svg");
     }
 
     private static void testGreedySubsetConstruction() {
@@ -87,8 +92,8 @@ public class TestAlgorithms {
         System.out.println();
         System.out.println(subset1.getStatistics());
 
-        AutomataViewer.printAutomata(automata1, "data/graph/s4/1a1.svg");
-        AutomataViewer.printAutomata(subset1, "data/graph/s4/subset1.svg");
+        AutomataViewer.saveAutomata(automata1, "data/graph/s4/1a1.svg");
+        AutomataViewer.saveAutomata(subset1, "data/graph/s4/subset1.svg");
 
 
         IAutomata automata2 = SeriesAutomata.s4e1a2();
@@ -101,7 +106,24 @@ public class TestAlgorithms {
         System.out.println();
         System.out.println(subset2.getStatistics());
 
-        AutomataViewer.printAutomata(automata2, "data/graph/s4/1a2.svg");
-        AutomataViewer.printAutomata(subset2, "data/graph/s4/subset2.svg");
+        AutomataViewer.saveAutomata(automata2, "data/graph/s4/1a2.svg");
+        AutomataViewer.saveAutomata(subset2, "data/graph/s4/subset2.svg");
+    }
+
+    private static void testColoredLabels() {
+        IAutomata automata = new BuchiAutomata();
+        IState q0 = new State("<b>{q0}</b>");
+        automata.addState(q0);
+        IState q1 = new State("{q1}");
+        automata.addState(q1);
+        IState q2 = new State( "<font color=\"red\">{q0}</font>, <font color=\"green\">{q1}</font>", true);
+        automata.addState(q2);
+
+        automata.addTransition(q0, 'a', q1);
+        automata.addTransition(q1, 'a', q2);
+
+
+        AutomataViewer.saveAutomata(automata, "data/graph/test_color.svg", true);
+        AutomataViewer.showAutomata(automata, true);
     }
 }

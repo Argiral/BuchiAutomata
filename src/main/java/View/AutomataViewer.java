@@ -5,14 +5,20 @@ import Interfaces.IAutomata;
 import Interfaces.IState;
 import Interfaces.ITransition;
 import guru.nidi.graphviz.attribute.*;
+import guru.nidi.graphviz.attribute.Color;
+import guru.nidi.graphviz.attribute.Label;
+import guru.nidi.graphviz.attribute.Shape;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.model.*;
-import javafx.util.Pair;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.List;
 
 import static guru.nidi.graphviz.model.Factory.*;
 
@@ -55,24 +61,51 @@ public class AutomataViewer {
     }
 
     public static Graph createGraph(IAutomata automata) {
+        return createGraph(automata, false);
+    }
+
+    public static Graph createGraph(IAutomata automata, boolean htmlNodes) {
         HashMap<IState, Node> dict = new HashMap<>();
 
         // Create nodes (map from state to node)
-        for (IState s: automata.getStates()) {
-            if (s.isFinal()) {
-                if (s.equals(automata.getInitialState())) {
-                    dict.put(s, node(s.getKey()).with(Style.lineWidth(3), Shape.SEPTAGON));
+        if (htmlNodes) {
+            // Interpret node names as html
+            // WARNING: it can throw an exception!
+            for (IState s: automata.getStates()) {
+                if (s.isFinal()) {
+                    if (s.equals(automata.getInitialState())) {
+                        dict.put(s, node(Label.html(s.getKey())).with(Style.lineWidth(3), Shape.SEPTAGON));
+                    } else {
+                        dict.put(s, node(Label.html(s.getKey())).with(Style.lineWidth(3)));
+                    }
                 } else {
-                    dict.put(s, node(s.getKey()).with(Style.lineWidth(3)));
+                    if (s.equals(automata.getInitialState())) {
+                        dict.put(s, node(Label.html(s.getKey())).with(Shape.SEPTAGON));
+                    } else {
+                        dict.put(s, node(Label.html(s.getKey())));
+                    }
                 }
-            } else {
-                if (s.equals(automata.getInitialState())) {
-                    dict.put(s, node(s.getKey()).with(Shape.SEPTAGON));
+            }
+        } else {
+            // Interpret node names as pure text
+            for (IState s: automata.getStates()) {
+                if (s.isFinal()) {
+                    if (s.equals(automata.getInitialState())) {
+                        dict.put(s, node(s.getKey()).with(Style.lineWidth(3), Shape.SEPTAGON));
+                    } else {
+                        dict.put(s, node(s.getKey()).with(Style.lineWidth(3)));
+                    }
                 } else {
-                    dict.put(s, node(s.getKey()));
+                    if (s.equals(automata.getInitialState())) {
+                        dict.put(s, node(s.getKey()).with(Shape.SEPTAGON));
+                    } else {
+                        dict.put(s, node(s.getKey()));
+                    }
                 }
             }
         }
+
+
 
         List<LinkSource> lksources = new LinkedList<>();
 
@@ -105,12 +138,40 @@ public class AutomataViewer {
 
     }
 
-    public static void printAutomata(IAutomata automata, String filename) {
-        try {
-            Graphviz.fromGraph(createGraph(automata)).width(2500).render(Format.SVG).toFile(new File(filename));
+    public static void saveAutomata(IAutomata automata, String filename) {
+        saveAutomata(automata, filename, false);
+    }
+
+    public static void saveAutomata(IAutomata automata, String filename, boolean htmlNodes) {
+         try {
+            Graphviz.fromGraph(createGraph(automata, htmlNodes)).width(2500).render(Format.SVG).toFile(new File(filename));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void showAutomata(IAutomata automata) {
+        showAutomata(automata, false);
+    }
+    public static void showAutomata(IAutomata automata, boolean htmlNodes) {
+        display(Graphviz.fromGraph(createGraph(automata, htmlNodes)).height(800).render(Format.SVG).toImage());
+    }
+
+    static JFrame frame;
+    private static JLabel label;
+    public static void display(BufferedImage image){
+        if(frame==null){
+            frame=new JFrame();
+            frame.setTitle("stained_image");
+            frame.setSize(image.getWidth(), image.getHeight());
+            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            label=new JLabel();
+            label.setIcon(new ImageIcon(image));
+            frame.getContentPane().add(label, BorderLayout.CENTER);
+            frame.setLocationRelativeTo(null);
+            frame.pack();
+            frame.setVisible(true);
+        }else label.setIcon(new ImageIcon(image));
     }
 
     private static List<MyPair> mergeTransitions(List<ITransition> transitions) {
@@ -145,76 +206,4 @@ public class AutomataViewer {
             this.transitionValue = transitionValue;
         }
     }
-
-//    public static void main(String[] args) throws IOException {
-////        Graphviz.fromGraph(createExampleGraph()).width(900).render(Format.PNG).toFile(new File("graph/example_automata.png"));
-//        Graphviz.fromGraph(createGraph(createTestNBA())).width(1500).render(Format.PNG).toFile(new File("graph/example_NBA.png"));
-////        Graphviz.fromGraph(createGraph(createTestDBA())).width(2500).render(Format.SVG).toFile(new File("graph/example_DBA.svg"));
-//    }
-////
-////
-//    static IAutomata createTestNBA() {
-//        // Create non-deterministic automata
-//        IAutomata automataNBA = new BuchiAutomata();
-//
-//        // Add states
-//        State s0 = new State("q0");
-//        automataNBA.addState(s0);
-//        State s1 = new State("q1");
-//        automataNBA.addState(s1);
-//        State s2 = new State("q2");
-//        automataNBA.addState(s2);
-//        State s3 = new State("q3");
-//        automataNBA.addState(s3);
-//        State s4 = new State("q4", true);
-//        automataNBA.addState(s4);
-//
-//        // Set initial state
-//        automataNBA.setInitialState(s0);
-//
-//        // Add transitions
-//        automataNBA.addTransition(new Transition(s0, 'a', s1));
-//        automataNBA.addTransition(new Transition(s0, 'b', s2));
-//        automataNBA.addTransition(new Transition(s1, 'b', s1));
-//        automataNBA.addTransition(new Transition(s1, 'a', s3));
-//        automataNBA.addTransition(new Transition(s2, 'a', s2));
-//        automataNBA.addTransition(new Transition(s2, 'b', s4));
-//        automataNBA.addTransition(new Transition(s3, 'b', s3));
-//        automataNBA.addTransition(new Transition(s3, 'a', s4));
-//        automataNBA.addTransition(new Transition(s3, 'b', s4));
-//        automataNBA.addTransition(new Transition(s4, 'a', s4));
-//        automataNBA.addTransition(new Transition(s4, 'b', s4));
-//
-//        return automataNBA;
-//    }
-//
-//    static IAutomata createTestDBA() {
-//        // Create deterministic automata
-//        IAutomata automataDBA = new BuchiAutomata();
-//
-//        // Add states
-//        State s0 = new State("q0");
-//        automataDBA.addState(s0);
-//        State s1 = new State("q1");
-//        automataDBA.addState(s1);
-//        State s2 = new State("q2", true);
-//        automataDBA.addState(s2);
-//        State s3 = State.createFinalState("q3");
-////        Model.State s3 = new Model.State("q3", true);
-//        automataDBA.addState(s3);
-//
-//        // Do not set initial state, q0 should be set automatically since it is the first one added
-//
-//        // Add transitions (complete except    (q1,'b',q2)   )
-//        automataDBA.addTransition(new Transition(s0, 'a', s1));
-//        automataDBA.addTransition(new Transition(s0, 'b', s2));
-//        automataDBA.addTransition(new Transition(s1, 'a', s3));
-//        // With transition Model.Transition(s1, 'b', s2) would be complete
-//        automataDBA.addTransition(new Transition(s2, 'a', s3));
-//        automataDBA.addTransition(new Transition(s2, 'b', s3));
-//        automataDBA.addTransition(new Transition(s3, 'a', s1));
-//        automataDBA.addTransition(new Transition(s3, 'b', s3));
-//
-//        return automataDBA;
-//    }
 }
