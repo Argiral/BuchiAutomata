@@ -1,0 +1,60 @@
+<svg width="160pt" height="222pt"
+ viewBox="0.00 0.00 160.43 221.60" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 217.6)">
+<title>%0</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-217.6 156.4292,-217.6 156.4292,4 -4,4"/>
+<!-- q0 -->
+<g id="node1" class="node">
+<title>q0</title>
+<polygon fill="none" stroke="#000000" stroke-width="3" points="134,-191.5946 128.6523,-206.8228 107,-213.6 85.3477,-206.8228 80,-191.5946 94.9839,-179.3826 119.0161,-179.3826 134,-191.5946"/>
+<text text-anchor="middle" x="107" y="-191.4" font-family="Times,serif" font-size="14.00" fill="#000000">q0</text>
+</g>
+<!-- q1 -->
+<g id="node2" class="node">
+<title>q1</title>
+<ellipse fill="none" stroke="#000000" cx="27" cy="-106.8" rx="27" ry="18"/>
+<text text-anchor="middle" x="27" y="-102.6" font-family="Times,serif" font-size="14.00" fill="#000000">q1</text>
+</g>
+<!-- q0&#45;&gt;q1 -->
+<g id="edge1" class="edge">
+<title>q0&#45;&gt;q1</title>
+<path fill="none" stroke="#000000" d="M93.4291,-180.5363C80.9777,-166.7152 62.3419,-146.0295 47.9749,-130.0821"/>
+<polygon fill="#000000" stroke="#000000" points="50.2001,-127.323 40.9064,-122.2361 44.9994,-132.0084 50.2001,-127.323"/>
+<text text-anchor="middle" x="78.1073" y="-147" font-family="Times,serif" font-size="14.00" fill="#000000">a</text>
+</g>
+<!-- q1&#45;&gt;q1 -->
+<g id="edge2" class="edge">
+<title>q1&#45;&gt;q1</title>
+<path fill="none" stroke="#000000" d="M51.5325,-114.9211C62.5078,-115.6945 72,-112.9875 72,-106.8 72,-102.6428 67.7151,-100.0567 61.5743,-99.0417"/>
+<polygon fill="#000000" stroke="#000000" points="61.6524,-95.5424 51.5325,-98.6789 61.3995,-102.5378 61.6524,-95.5424"/>
+<text text-anchor="middle" x="85.2146" y="-102.6" font-family="Times,serif" font-size="14.00" fill="#000000">a,b,c</text>
+</g>
+<!-- q2 -->
+<g id="node3" class="node">
+<title>q2</title>
+<ellipse fill="none" stroke="#000000" cx="81" cy="-18" rx="27" ry="18"/>
+<text text-anchor="middle" x="81" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">q2</text>
+</g>
+<!-- q1&#45;&gt;q2 -->
+<g id="edge3" class="edge">
+<title>q1&#45;&gt;q2</title>
+<path fill="none" stroke="#000000" d="M37.157,-90.0974C45.1014,-77.0333 56.285,-58.6425 65.3684,-43.7053"/>
+<polygon fill="#000000" stroke="#000000" points="68.4996,-45.2924 70.705,-34.9296 62.5186,-41.6553 68.4996,-45.2924"/>
+<text text-anchor="middle" x="62.5" y="-58.2" font-family="Times,serif" font-size="14.00" fill="#000000">b</text>
+</g>
+<!-- q2&#45;&gt;q0 -->
+<g id="edge5" class="edge">
+<title>q2&#45;&gt;q0</title>
+<path fill="none" stroke="#000000" d="M89.294,-35.2688C95.5575,-49.3171 103.6303,-69.8487 107,-88.8 111.8039,-115.8172 111.0535,-147.2903 109.5652,-169.0379"/>
+<polygon fill="#000000" stroke="#000000" points="106.0641,-168.9162 108.7709,-179.1594 113.0426,-169.4639 106.0641,-168.9162"/>
+<text text-anchor="middle" x="114.1073" y="-102.6" font-family="Times,serif" font-size="14.00" fill="#000000">c</text>
+</g>
+<!-- q2&#45;&gt;q2 -->
+<g id="edge4" class="edge">
+<title>q2&#45;&gt;q2</title>
+<path fill="none" stroke="#000000" d="M105.5325,-26.1211C116.5078,-26.8945 126,-24.1875 126,-18 126,-13.8428 121.7151,-11.2567 115.5743,-10.2417"/>
+<polygon fill="#000000" stroke="#000000" points="115.6524,-6.7424 105.5325,-9.8789 115.3995,-13.7378 115.6524,-6.7424"/>
+<text text-anchor="middle" x="139.2146" y="-13.8" font-family="Times,serif" font-size="14.00" fill="#000000">a,b,c</text>
+</g>
+</g>
+</svg>

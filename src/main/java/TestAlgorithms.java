@@ -12,13 +12,18 @@ public class TestAlgorithms {
     public static void main(String[] args) {
 //        testFactorySave();
 //        testFactoryLoad();
+//        testColoredLabels();
+
 //        testReductionDegOfNonDet();
 //        testUnion();
 //        testIntersection();
 //        testComplementDBA();
 //        testGreedySubsetConstruction();
+        testComplementBA();
 
-        testColoredLabels();
+//        System.out.println(BuchiAlgorithms.extractNodesColor("<font color=\"green\">{q1}</font>"));
+//        System.out.println(BuchiAlgorithms.extractNodesNames("{q0,q1}, {q1}, {q2} (Java), (.Net)"));
+//        System.out.println(BuchiAlgorithms.statesFromName("{q0}, {q1}, (Java), (.Net)", SeriesAutomata.s2ex4a1()));
 
     }
 
@@ -108,6 +113,49 @@ public class TestAlgorithms {
 
         AutomataViewer.saveAutomata(automata2, "data/graph/s4/1a2.svg");
         AutomataViewer.saveAutomata(subset2, "data/graph/s4/subset2.svg");
+
+
+        IAutomata automata3 = SeriesAutomata.s5e1();
+
+        IAutomata subset3 = BuchiAlgorithms.greedySubsetConstruction(automata3);
+
+        System.out.println();
+        System.out.println();
+        System.out.println(automata3.getStatistics());
+        System.out.println();
+        System.out.println(subset3.getStatistics());
+
+        AutomataViewer.saveAutomata(automata3, "data/graph/s5/1.svg");
+        AutomataViewer.saveAutomata(subset3, "data/graph/s5/subset.svg");
+    }
+
+    private static void testComplementBA() {
+//        IAutomata automata1 = SeriesAutomata.s4e1a1();
+//        IAutomata automata5 = SeriesAutomata.s5e2();
+//
+//        IAutomata complement5 = BuchiAlgorithms.complementNBA(automata5);
+//
+//        AutomataViewer.showAutomata(complement5, true);
+//        AutomataViewer.saveAutomata(automata5, "data/graph/s5/2.svg");
+//        AutomataViewer.saveAutomata(complement5, "data/graph/s5/complement.svg", true);
+
+
+        IAutomata automata6a = SeriesAutomata.s6e1a();
+
+        IAutomata complement6a = BuchiAlgorithms.complementNBA(automata6a);
+
+        AutomataViewer.showAutomata(complement6a, true);
+        AutomataViewer.saveAutomata(automata6a,"data/graph/s6/1a.svg");
+        AutomataViewer.saveAutomata(complement6a, "data/graph/s6/complement1a.svg", true);
+
+
+        IAutomata automata6b = SeriesAutomata.s6e1b();
+
+        IAutomata complement6b = BuchiAlgorithms.complementNBA(automata6b);
+
+//        AutomataViewer.showAutomata(complement6b, true);
+        AutomataViewer.saveAutomata(automata6b,"data/graph/s6/1b.svg");
+        AutomataViewer.saveAutomata(complement6b, "data/graph/s6/complement1b.svg", true);
     }
 
     private static void testColoredLabels() {

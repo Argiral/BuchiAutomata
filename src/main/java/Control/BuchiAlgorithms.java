@@ -8,6 +8,8 @@ import Model.State;
 import javafx.util.Pair;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class BuchiAlgorithms {
@@ -105,7 +107,6 @@ public class BuchiAlgorithms {
 
         // Keep track of the nodes to complete
         Set<String> toCheck = new HashSet<>();
-        Set<String> alreadyChecked = new HashSet<>();
 
         // Keep track of the lists of states represented by the new states
         Map<String, Pair<IState, IState>> nameToList = new HashMap<>();
@@ -195,7 +196,6 @@ public class BuchiAlgorithms {
 
             // Remove state from list to check
             toCheck.remove(stateToCheckName);
-            alreadyChecked.add(stateToCheckName);
         }
 
         return newAutomata;
@@ -282,9 +282,243 @@ public class BuchiAlgorithms {
     }
 
     public static IAutomata complementNBA(IAutomata automata) {
-        // TODO implement complement NBA
-        System.err.println("Not yet implemented!");
-        return null;
+        // "<font color=\"red\">{q0}</font>, <font color=\"green\">{q1}</font>"
+
+        //############## Construct "upper part" ##############
+        IAutomata subset = greedySubsetConstruction(automata);
+
+        IAutomata newAutomata = new BuchiAutomata();
+        for (IState s : subset.getStates()) {
+            newAutomata.addState(s);
+        }
+        for (ITransition t : subset.getTransitionsList()) {
+            newAutomata.addTransition(t);
+        }
+
+        // Keep track of the nodes to complete
+        Set<String> toCheck = new HashSet<>();
+
+        //############## Add missing transitions to final trap state ##############
+        // TODO complement NBA trap state
+
+        // ############## Construct lower part and initialize coloring ##############
+        Map<IState, IState> upToDown = new HashMap<>();
+        Map<String, List<List<IState>>> nameToLists = new HashMap<>();
+        Map<String, Boolean> containsRed = new HashMap<>();
+        Map<Pair<String, List<IState>>, String> stateSubStateToColor = new HashMap<>();  // state and listOfStats to color (e.g. state {q0},{q1,q2} and substate [q1,q2] -> "red")
+
+        // Copy states
+        for (IState upperState : subset.getStates()) {
+            List<List<IState>> lOfStates = statesFromName(upperState.getKey(), automata);
+            // New state is final if none of those it represents was final
+            boolean isFinal = true;
+            StringBuilder temp = new StringBuilder();
+            List<String> tempListOfColor = new LinkedList<>(); // can not already add to dictionary since in the loop we don't have yet the name of the final state
+            for (List<IState> s : lOfStates) {
+                String name = "{" + s.stream().map(IState::getKey).collect(Collectors.joining(",")) + "}";
+                if (s.get(0).isFinal()) {
+                    // Paint in red
+                    temp.append("<font color=\"red\">").append(name).append("</font>");
+                    isFinal = false;
+                    tempListOfColor.add("red");
+                } else {
+                    // Paint in green
+                    temp.append("<font color=\"green\">").append(name).append("</font>");
+                    tempListOfColor.add("green");
+                }
+                temp.append(",");
+            }
+            // Remove last ","
+            temp.deleteCharAt(temp.length() - 1);
+
+            String newName = "(" + temp.toString() + ")";
+
+            assert lOfStates.size() == tempListOfColor.size();
+            for (int i = 0; i < lOfStates.size(); i++) {
+                // Update color dictionary
+                stateSubStateToColor.put(new Pair<>(newName.toString(), lOfStates.get(i)), tempListOfColor.get(i));
+            }
+
+            // Create new state
+            IState lowerState = new State(newName.toString(), isFinal);
+            // Keep track of the states represented in the new state
+            nameToLists.put(newName.toString(), lOfStates);
+            // Keep track of whether the new state contains red or not
+            containsRed.put(newName.toString(), !isFinal);
+            // Add the new state to the automata
+            newAutomata.addState(lowerState);
+            // Add to the list to check
+            toCheck.add(newName.toString());
+            // Save reference from upper state to lower
+            upToDown.put(upperState, lowerState);
+            // Save reference from new state to list of represented states
+//            nameToLists.put(newName.toString(), states);
+        }
+
+        // Copy transitions
+        for (ITransition t : subset.getTransitionsList()) {
+            newAutomata.addTransition(t.getSource(), t.getSymbol(), upToDown.get(t.getDestination()));
+        }
+
+
+        // ############## Check all the possible transitions ##############
+        // Construct every new state
+        // Construct every new state
+        while (!toCheck.isEmpty()) {
+            // Get next state to construct
+            String stateToCheckName = toCheck.iterator().next();
+            boolean hasRed = containsRed.get(stateToCheckName);
+            IState stateToCheck = newAutomata.getStateByKey(stateToCheckName);
+            assert stateToCheck != null;
+
+            // States ({}) represented in the state
+            List<List<IState>> currentStates = nameToLists.get(stateToCheckName);
+            // Reverse list --> start from right-most element
+            Collections.reverse(currentStates);
+
+            // Do for each symbol
+            for (char symbol : automata.getAlphabet()) {
+                // Get successors
+                List<List<IState>> successors = new LinkedList<>();
+                Map<List<IState>, List<IState>> statesToOrigin = new HashMap<>(); // Keep track of which states generated which states (important for coloring)
+                Set<IState> alreadyAdded = new HashSet<>(); // Keep track of states already considered ("remove" part in the algorithm)
+
+                for (List<IState> ls : currentStates) {
+                    // Get successors of each element
+                    List<IState> reachable = automata.run(symbol, ls);
+
+                    // Split into final and non-final (with finals on the right)
+                    List<IState> reachable_final = reachable.stream().filter(IState::isFinal).collect(Collectors.toList());
+                    List<IState> reachable_normal = reachable.stream().filter(s -> !s.isFinal()).collect(Collectors.toList());
+
+                    // Remove states already reached for elements more on the right and add to list
+                    reachable_final = new LinkedList<>(new HashSet<>(reachable_final)); // remove duplicates inside list
+                    reachable_final.removeAll(alreadyAdded);    // remove duplicates from other states
+                    alreadyAdded.addAll(reachable_final);       // keep track for future duplicates
+                    successors.add(reachable_final);            // add to list as successors
+                    statesToOrigin.put(reachable_final, ls);    // Keep track of origin of the new states
+                    reachable_normal = new LinkedList<>(new HashSet<>(reachable_normal)); // remove duplicates inside list
+                    reachable_normal.removeAll(alreadyAdded);   // remove duplicates
+                    alreadyAdded.addAll(reachable_normal);      // keep track for future duplicates
+                    successors.add(reachable_normal);           // add to list as successors
+                    statesToOrigin.put(reachable_normal, ls);   // Keep track of origin of the new states
+                }
+
+                // Remove empty sets
+                successors.removeIf(List::isEmpty);
+
+                // Reverse again
+                Collections.reverse(successors);
+
+                // Do not add empty states
+                if (successors.isEmpty()) {
+                    break;
+                }
+
+
+                List<String> tempColors = new LinkedList<>();
+                boolean newStateContainsRed = false;
+
+                // If necessary, create new state and add to lists (toCheck, nameToLists)
+                StringBuilder temp = new StringBuilder();
+                for (List<IState> list : successors) {
+                    String originColor = stateSubStateToColor.get(new Pair<>(stateToCheckName, statesToOrigin.get(list)));
+                    if (!originColor.equals("red") && !originColor.equals("green") && !originColor.equals("blue")) {
+                        System.err.println("Problem identifying color! ");
+                        System.exit(465);
+                    }
+                    // Decide depending on whether original state had red
+                    String name = "{" + list.stream().map(IState::getKey).collect(Collectors.joining(",")) + "}";
+                    if (hasRed) {
+                        switch (originColor) {
+                            // A successor component of a red component is red
+                            case "red":
+                                temp.append("<font color=\"red\">").append(name).append("</font>,");
+                                tempColors.add("red");
+                                newStateContainsRed = true;
+                                break;
+                            // A successor component of a blue component is blue
+                            case "blue":
+                                temp.append("<font color=\"blue\">").append(name).append("</font>,");
+                                tempColors.add("blue");
+                                break;
+                            case "green":
+                                // An accepting successor component of a green component is blue
+                                if (list.get(0).isFinal()) {
+                                    temp.append("<font color=\"blue\">").append(name).append("</font>,");
+                                    tempColors.add("blue");
+                                } else {
+                                    temp.append("<font color=\"green\">").append(name).append("</font>,");
+                                    tempColors.add("green");
+                                }
+                                break;
+                        }
+                    } else {
+                        switch (originColor) {
+                            // A successor component of a blue component is red
+                            case "blue":
+                                temp.append("<font color=\"red\">").append(name).append("</font>,");
+                                tempColors.add("red");
+                                newStateContainsRed = true;
+                                break;
+                            case "green":
+                                // An accepting successor component of a green component is red
+                                if (list.get(0).isFinal()) {
+                                    temp.append("<font color=\"red\">").append(name).append("</font>,");
+                                    tempColors.add("red");
+                                    newStateContainsRed = true;
+                                } else {
+                                    temp.append("<font color=\"green\">").append(name).append("</font>,");
+                                    tempColors.add("green");
+                                }
+                                break;
+                            // Since predecessor has not red, this case should never happen!
+                            case "red":
+                                System.err.println("This case should have happened!...");
+                                System.exit(798);
+                                break;
+                        }
+                    }
+                }
+                temp.deleteCharAt(temp.length() - 1);  // Delete last ','
+
+
+                String newStateName = "(" + temp + ")";
+                IState newState = newAutomata.getStateByKey(newStateName);
+                if (newState == null) {
+                    // Create new state
+                    newState = new State(newStateName);
+
+                    // Add to automata
+                    newAutomata.addState(newState);
+
+                    // Add to list to check
+                    toCheck.add(newStateName);
+
+                    // Update dictionary
+                    nameToLists.put(newStateName, successors);
+                }
+                // Add transition
+                newAutomata.addTransition(stateToCheck, symbol, newState);
+
+                // Update color dictionary
+                assert successors.size() == tempColors.size();
+                for (int i = 0; i < successors.size(); i++) {
+                    // Update color dictionary
+                    stateSubStateToColor.put(new Pair<>(newStateName, successors.get(i)), tempColors.get(i));
+                }
+                // Update contains red
+                containsRed.put(newStateName, newStateContainsRed);
+
+            }
+
+            // Remove state from list to check
+            toCheck.remove(stateToCheckName);
+        }
+
+
+
+        return newAutomata;
     }
 
     public static IAutomata removeDeadEnds(IAutomata automata) {
@@ -293,20 +527,17 @@ public class BuchiAlgorithms {
     }
 
     public static IAutomata greedySubsetConstruction(IAutomata automata) {
-        // TODO fix greedy subset construction
-
         IAutomata newAutomata = new BuchiAutomata();
 
         // Keep track of the nodes to complete
         Set<String> toCheck = new HashSet<>();
-        Set<String> alreadyChecked = new HashSet<>();
 
         // Keep track of the lists of states represented by the new states
         // Each state represents multiple lists (in the algorighm: {}), each containing potentially multiple states
         Map<String, List<List<IState>>> nameToLists = new HashMap<>();
 
         // Initial state of the new automata
-        IState newq0 = new State("({" + automata.getInitialState().getKey() + "})", automata.getInitialState().isFinal());
+        IState newq0 = new State("({" + automata.getInitialState().getKey() + "})");
         newAutomata.addState(newq0);
 
         // Add the initial state to the list of states to check
@@ -358,6 +589,12 @@ public class BuchiAlgorithms {
                 // Reverse again
                 Collections.reverse(successors);
 
+                // Do not add empty states
+                if (successors.isEmpty()) {
+                    break;
+                }
+
+
                 // If necessary, create new state and add to lists (toCheck, nameToLists)
                 StringBuilder temp = new StringBuilder();
                 for (List<IState> list : successors) {
@@ -365,7 +602,9 @@ public class BuchiAlgorithms {
                     temp.append(list.stream().map(IState::getKey).sorted().collect(Collectors.joining(",")));
                     temp.append("},");
                 }
+
                 temp.deleteCharAt(temp.length() - 1);  // Delete last ','
+
                 String newStateName = "(" + temp + ")";
                 IState newState = newAutomata.getStateByKey(newStateName);
                 if (newState == null) {
@@ -387,7 +626,6 @@ public class BuchiAlgorithms {
 
             // Remove state from list to check
             toCheck.remove(stateToCheckName);
-            alreadyChecked.add(stateToCheckName);
         }
 
         return newAutomata;
@@ -459,5 +697,45 @@ public class BuchiAlgorithms {
             System.out.print(s.getKey() + " - ");
         }
         System.out.println();
+    }
+
+    public static List<List<IState>> statesFromName(String name, IAutomata sourceAutomata) {
+        List<List<IState>> lOfStates = new LinkedList<>();
+
+        for (List<String> l : extractNodesNames(name)) {
+            List<IState> states = new LinkedList<>();
+            for (String s : l) {
+                states.add(sourceAutomata.getStateByKey(s));
+            }
+            lOfStates.add(states);
+        }
+
+        return lOfStates;
+    }
+
+    public static List<List<String>> extractNodesNames(String nodeName) {
+        List<List<String>> matchList = new LinkedList<>();
+
+        Pattern regex = Pattern.compile("\\{([a-zA-Z0-9,]*)\\}");
+        Matcher regexMatcher = regex.matcher(nodeName);
+
+        while (regexMatcher.find()) {//Finds Matching Pattern in String
+            String states = regexMatcher.group(1); // Might be more comma-separated states names
+            matchList.add(Arrays.asList(states.split(",")));
+        }
+
+        return matchList;
+    }
+
+    public static List<String> extractNodesColor(String nodeName) {
+        Pattern regex = Pattern.compile(".*color=\"(green|red|blue)\".*");
+        Matcher regexMatcher = regex.matcher(nodeName);
+
+        List<String> matchList = new LinkedList<>();
+        while (regexMatcher.find()) {//Finds Matching Pattern in String
+            matchList.add(regexMatcher.group(1));
+        }
+
+        return matchList;
     }
 }

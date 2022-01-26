@@ -154,7 +154,7 @@ public class AutomataViewer {
         showAutomata(automata, false);
     }
     public static void showAutomata(IAutomata automata, boolean htmlNodes) {
-        display(Graphviz.fromGraph(createGraph(automata, htmlNodes)).height(800).render(Format.SVG).toImage());
+        display(Graphviz.fromGraph(createGraph(automata, htmlNodes)).render(Format.SVG).toImage());
     }
 
     static JFrame frame;
