@@ -631,30 +631,62 @@ public class BuchiAlgorithms {
     }
 
     public static IAutomata removeDeadEnds(IAutomata automata) {
-        // TODO implement remove dead ends
-        System.err.println("Remove dead ends not yet implemented!");
-        return automata;
+        // Dead ends are those state from which you can not reach a final state
+        // --> In the "inverted" automata, they can not be reached from any final state
+        // ----> In this way we only have to check final states and not all
+
+        // Initialize new automata
+        IAutomata newAutomata = automata.clone();
+
+        // Invert automata
+        IAutomata inverted = invertTransitions(newAutomata);
+
+        // Get list of dead ends
+        Set<IState> reachableInverted = reachableStates(inverted, inverted.getFinalStates(), new LinkedList<>());
+
+        List<IState> toRemove = new LinkedList<>();
+        for (IState s : newAutomata.getStates()) {
+            if (!reachableInverted.contains(s)) {
+                toRemove.add(s);
+            }
+        }
+        for (IState s : toRemove) {
+            newAutomata.removeState(s);
+        }
+
+
+        // Suppose a final state q0 is a dead end, but it can be reached from another non-final state q1
+        // q0 will be identified as dead end, but q1 not!
+        // We need to check twice (only if some final states where removed)
+        if (newAutomata.getFinalStates().size() < automata.getFinalStates().size()) {
+            // Invert again new automata
+            inverted = invertTransitions(newAutomata);
+
+            // Get unreachable states
+            // Start with empty reached states
+            reachableInverted = reachableStates(inverted, newAutomata.getFinalStates(), new LinkedList<>());
+
+            // Remove unreachable states
+            toRemove = new LinkedList<>();
+            for (IState s : newAutomata.getStates()) {
+                if (!reachableInverted.contains(s)) {
+                    toRemove.add(s);
+                }
+            }
+            for (IState s : toRemove) {
+                newAutomata.removeState(s);
+            }
+        }
+
+        return newAutomata;
     }
 
     public static IAutomata removeUnreachableStates(IAutomata automata) {
         IAutomata newAutomata = automata.clone();
 
-        Set<IState> alreadyReached = new HashSet<>();
-        // Initialize states to check
-        Set<IState> newStates = new HashSet<>(newAutomata.getInitialState().toList());
-
-        // While we still reach new states
-        while (newStates.size() > 0) {
-            for (char symbol : automata.getAlphabet()) {
-                newStates.addAll(automata.run(symbol, newStates));
-            }
-
-            // Remove the state already reached in the previous iterations
-            newStates.removeAll(alreadyReached);
-
-            // Add the newly reached states to the list of visited states
-            alreadyReached.addAll(newStates);
-        }
+        // Get reachable states
+        // initial state is already okay
+        Set<IState> alreadyReached = reachableStates(automata, newAutomata.getInitialState().toList(), newAutomata.getInitialState().toList());
 
         // Remove states not visited
         for (IState s : newAutomata.getStates()) {
@@ -667,11 +699,45 @@ public class BuchiAlgorithms {
         return newAutomata;
     }
 
+
+
+    public static Set<IState> reachableStates(IAutomata automata, List<IState> initialStates, List<IState> alreadyReached) {
+        Set<IState> reached = new HashSet<>();
+
+        // Initialize states to check
+        Set<IState> newStates = new HashSet<>(alreadyReached);
+
+        // If alreadyReached is empty, use initial states to initialize newStates
+        // This is necessary since this method is used both to find reachable states from initial state (which
+        // has to be included in reached states), and to fin reachable states from final states (which might themselves
+        // be excluded from reached states if there are no loops on them)
+        if (newStates.size() == 0) {
+            for (char symbol : automata.getAlphabet()) {
+                newStates.addAll(automata.run(symbol, initialStates));
+            }
+        }
+
+        // While we still reach new states
+        while (newStates.size() > 0) {
+            for (char symbol : automata.getAlphabet()) {
+                newStates.addAll(automata.run(symbol, newStates));
+            }
+
+            // Remove the state already reached in the previous iterations
+            newStates.removeAll(reached);
+
+            // Add the newly reached states to the list of visited states
+            reached.addAll(newStates);
+        }
+
+        return reached;
+    }
+
     public static IAutomata invertTransitions(IAutomata automata) {
         IAutomata newAutomata = new BuchiAutomata();
 
         for (IState s : automata.getStates()) {
-            newAutomata.addState(s);
+            newAutomata.addState(new State(s.getKey(), s.isFinal()));
         }
 
         for (ITransition t : automata.getTransitionsList()) {

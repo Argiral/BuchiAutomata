@@ -20,7 +20,8 @@ public class TestAlgorithms {
 //        testComplementDBA();
 //        testGreedySubsetConstruction();
 //        testComplementBA();
-        testRemoveUnreachableStates();
+//        testRemoveUnreachableStates();
+        testRemoveDeadEnds();
 //        testSimplifyAutomata();
 //        testInvertTransitions();
 
@@ -195,7 +196,7 @@ public class TestAlgorithms {
         automata.addTransition(newState, 'z', automata.getStateByKey("0"));
         automata.addTransition(newState, 'z', automata.getStateByKey("1"));
 
-//        AutomataViewer.showAutomata(automata);
+        AutomataViewer.showAutomata(automata);
 
         IAutomata smaller = BuchiAlgorithms.removeUnreachableStates(automata);
 
@@ -203,6 +204,53 @@ public class TestAlgorithms {
         System.out.println(smaller.getStatistics());
 
         AutomataViewer.showAutomata(smaller);
+
+    }
+
+    private static void testRemoveDeadEnds() {
+        IAutomata automata = new BuchiAutomata();
+
+        IState q0 = new State("q0");
+        automata.addState(q0);
+        IState q1 = new State("q1");
+        automata.addState(q1);
+        IState q2 = new State("q2");
+        automata.addState(q2);
+        IState q3 = new State("q3", true);
+        automata.addState(q3);
+        IState q4 = new State("q4", true);
+        automata.addState(q4);
+        IState q5 = new State("q5", true);
+        automata.addState(q5);
+        IState q6 = new State("q6", true);
+        automata.addState(q6);
+        IState q7 = new State("q7");
+        automata.addState(q7);
+        IState q8 = new State("q8", true);
+        automata.addState(q8);
+        IState q9 = new State("q9");
+        automata.addState(q9);
+        IState q10 = new State("q10");
+        automata.addState(q10);
+
+        automata.addTransition(q0, 'a', q1);
+        automata.addTransition(q1, 'a', q2);
+        automata.addTransition(q1, 'a', q4);
+        automata.addTransition(q1, 'a', q5);
+        automata.addTransition(q1, 'a', q6);
+        automata.addTransition(q1, 'a', q7);
+        automata.addTransition(q1, 'a', q9);
+        automata.addTransition(q2, 'a', q3);
+        automata.addTransition(q5, 'a', q1);
+        automata.addTransition(q6, 'a', q6);
+        automata.addTransition(q7, 'a', q8);
+        automata.addTransition(q8, 'a', q7);
+        automata.addTransition(q10, 'a', q1);
+
+        IAutomata reduced = BuchiAlgorithms.removeDeadEnds(automata);
+
+        AutomataViewer.showAutomata(automata);
+        AutomataViewer.showAutomata(reduced);
     }
 
     private static void testSimplifyAutomata() {

@@ -157,21 +157,17 @@ public class AutomataViewer {
         display(Graphviz.fromGraph(createGraph(automata, htmlNodes)).render(Format.SVG).toImage());
     }
 
-    static JFrame frame;
-    private static JLabel label;
     public static void display(BufferedImage image){
-        if(frame==null){
-            frame=new JFrame();
-            frame.setTitle("stained_image");
-            frame.setSize(image.getWidth(), image.getHeight());
-            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            label=new JLabel();
-            label.setIcon(new ImageIcon(image));
-            frame.getContentPane().add(label, BorderLayout.CENTER);
-            frame.setLocationRelativeTo(null);
-            frame.pack();
-            frame.setVisible(true);
-        }else label.setIcon(new ImageIcon(image));
+        JFrame frame = new JFrame();
+        frame.setTitle("Automata");
+        frame.setSize(image.getWidth(), image.getHeight());
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        JLabel label = new JLabel();
+        label.setIcon(new ImageIcon(image));
+        frame.getContentPane().add(label, BorderLayout.CENTER);
+        frame.setLocationRelativeTo(null);
+        frame.pack();
+        frame.setVisible(true);
     }
 
     private static List<MyPair> mergeTransitions(List<ITransition> transitions) {
