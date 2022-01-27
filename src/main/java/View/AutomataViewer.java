@@ -156,15 +156,34 @@ public class AutomataViewer {
     public static void showAutomata(IAutomata automata, boolean htmlNodes) {
         display(Graphviz.fromGraph(createGraph(automata, htmlNodes)).render(Format.SVG).toImage());
     }
+    public static void showAutomata(IAutomata automata, boolean htmlNodes, boolean resizable) {
+        display(Graphviz.fromGraph(createGraph(automata, htmlNodes)).render(Format.SVG).toImage(), resizable);
+    }
 
-    public static void display(BufferedImage image){
+    public static void display(BufferedImage image) {
+        display(image, false);
+    }
+
+    public static void display(BufferedImage image, boolean resizable){
         JFrame frame = new JFrame();
         frame.setTitle("Automata");
         frame.setSize(image.getWidth(), image.getHeight());
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        JLabel label = new JLabel();
+        JLabel label;
+        if (!resizable) {
+            label = new JLabel();
+        } else {
+            label = new JLabel(){
+                // Override paintComponent
+                public void paintComponent(Graphics g)
+                {
+                    super.paintComponent(g);
+                    g.drawImage(image, 0, 0, getWidth(), getHeight(), 0, 0, image.getWidth(null), image.getHeight(null), null);
+                }
+            };
+        }
         label.setIcon(new ImageIcon(image));
-        frame.getContentPane().add(label, BorderLayout.CENTER);
+        frame.getContentPane().add(label);
         frame.setLocationRelativeTo(null);
         frame.pack();
         frame.setVisible(true);

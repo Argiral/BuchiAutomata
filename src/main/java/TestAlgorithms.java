@@ -19,9 +19,9 @@ public class TestAlgorithms {
 //        testIntersection();
 //        testComplementDBA();
 //        testGreedySubsetConstruction();
-        testComplementBA();
+//        testComplementBA();
 //        testRemoveUnreachableStates();
-//        testRemoveDeadEnds();
+        testRemoveDeadEnds();
 //        testSimplifyAutomata();
 //        testInvertTransitions();
 
@@ -159,7 +159,7 @@ public class TestAlgorithms {
         IAutomata complement6b = BuchiAlgorithms.complementNBA(automata6b);
 
         AutomataViewer.showAutomata(automata6b);
-        AutomataViewer.showAutomata(complement6b, true);
+        AutomataViewer.showAutomata(complement6b, true, true);
         AutomataViewer.saveAutomata(automata6b,"data/graph/s6/1b.svg");
         AutomataViewer.saveAutomata(complement6b, "data/graph/s6/complement1b.svg", true);
     }
@@ -248,6 +248,8 @@ public class TestAlgorithms {
         automata.addTransition(q7, 'a', q8);
         automata.addTransition(q8, 'a', q7);
         automata.addTransition(q10, 'a', q1);
+
+        System.out.println(automata.getStatistics());
 
         IAutomata reduced = BuchiAlgorithms.removeDeadEnds(automata);
 
