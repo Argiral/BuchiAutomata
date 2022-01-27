@@ -19,9 +19,9 @@ public class TestAlgorithms {
 //        testIntersection();
 //        testComplementDBA();
 //        testGreedySubsetConstruction();
-//        testComplementBA();
+        testComplementBA();
 //        testRemoveUnreachableStates();
-        testRemoveDeadEnds();
+//        testRemoveDeadEnds();
 //        testSimplifyAutomata();
 //        testInvertTransitions();
 
@@ -142,22 +142,24 @@ public class TestAlgorithms {
 //        AutomataViewer.showAutomata(complement5, true);
 //        AutomataViewer.saveAutomata(automata5, "data/graph/s5/2.svg");
 //        AutomataViewer.saveAutomata(complement5, "data/graph/s5/complement.svg", true);
-
-
-        IAutomata automata6a = SeriesAutomata.s6e1a();
-
-        IAutomata complement6a = BuchiAlgorithms.complementNBA(automata6a);
-
-        AutomataViewer.showAutomata(complement6a, true);
-        AutomataViewer.saveAutomata(automata6a,"data/graph/s6/1a.svg");
-        AutomataViewer.saveAutomata(complement6a, "data/graph/s6/complement1a.svg", true);
+//
+//
+//        IAutomata automata6a = SeriesAutomata.s6e1a();
+//
+//        IAutomata complement6a = BuchiAlgorithms.complementNBA(automata6a);
+//
+//        AutomataViewer.showAutomata(automata6a);
+//        AutomataViewer.showAutomata(complement6a, true);
+//        AutomataViewer.saveAutomata(automata6a,"data/graph/s6/1a.svg");
+//        AutomataViewer.saveAutomata(complement6a, "data/graph/s6/complement1a.svg", true);
 
 
         IAutomata automata6b = SeriesAutomata.s6e1b();
 
         IAutomata complement6b = BuchiAlgorithms.complementNBA(automata6b);
 
-//        AutomataViewer.showAutomata(complement6b, true);
+        AutomataViewer.showAutomata(automata6b);
+        AutomataViewer.showAutomata(complement6b, true);
         AutomataViewer.saveAutomata(automata6b,"data/graph/s6/1b.svg");
         AutomataViewer.saveAutomata(complement6b, "data/graph/s6/complement1b.svg", true);
     }
@@ -258,6 +260,8 @@ public class TestAlgorithms {
 
         AutomataViewer.showAutomata(automata);
 
-        BuchiAlgorithms.simplifyAutomata(automata);
+        IAutomata simplified = BuchiAlgorithms.simplifyAutomata(automata);
+
+        AutomataViewer.showAutomata(simplified);
     }
 }

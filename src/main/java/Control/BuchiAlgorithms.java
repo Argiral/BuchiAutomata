@@ -5,6 +5,7 @@ import Interfaces.IState;
 import Interfaces.ITransition;
 import Model.BuchiAutomata;
 import Model.State;
+import Model.Transition;
 import javafx.util.Pair;
 
 import java.util.*;
@@ -298,8 +299,18 @@ public class BuchiAlgorithms {
         // Keep track of the nodes to complete
         Set<String> toCheck = new HashSet<>();
 
-        //############## Add missing transitions to final trap state ##############
+        //############## Keep track of missing transitions ##############
         // TODO complement NBA trap state
+        List<ITransition> missingTransitions = new LinkedList<>();
+        IState trapState = new State("trap", true);
+        for (IState s : subset.getStates()) {
+            for (char symbol : subset.getAlphabet()) {
+                // If for a given state and a given symbol there are no transitions
+                if (subset.getTransitionsMap().get(s).stream().noneMatch(t -> t.getSymbol() == symbol)) {
+                    missingTransitions.add(new Transition(s, symbol, trapState));
+                }
+            }
+        }
 
         // ############## Construct lower part and initialize coloring ##############
         Map<IState, IState> upToDown = new HashMap<>();
@@ -516,7 +527,19 @@ public class BuchiAlgorithms {
             toCheck.remove(stateToCheckName);
         }
 
-
+        //############## If any, add missing transitions from upper part ##############
+        if (!missingTransitions.isEmpty()) {
+            // Add trap state
+            newAutomata.addState(trapState);
+            // Add transitions to trap state
+            for (ITransition t : missingTransitions) {
+                newAutomata.addTransition(t);
+            }
+            // Add loops on trap state
+            for (char symbol : newAutomata.getAlphabet()) {
+                newAutomata.addTransition(trapState, symbol, trapState);
+            }
+        }
 
         return newAutomata;
     }
